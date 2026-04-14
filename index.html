@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHY International — Marketing Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-mid: #132040;
+  --navy-light: #1e2f52;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: #7a6230;
+  --teal: #2a9d8f;
+  --teal-light: #3fbcad;
+  --coral: #e76f51;
+  --sky: #6ba3be;
+  --cream: #f8f4ee;
+  --text-pri: #f0ece4;
+  --text-sec: #9ba8bb;
+  --text-dim: #5c6880;
+  --border: rgba(201,168,76,0.15);
+  --border-bright: rgba(201,168,76,0.35);
+  --card-bg: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.07);
+}
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 0 2px rgba(201,168,76,0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(201,168,76,0.15); }
+}
+#traffic-card { animation: pulse-border 1.5s ease-in-out 4; }
+
+body {
+  background: var(--navy);
+  color: var(--text-pri);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+/* Layout */
+.shell { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--navy-mid);
+  border-right: 1px solid var(--border);
+  padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.logo {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.logo-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.logo-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 4px;
+}
+.nav-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  padding: 0 24px;
+  margin-bottom: 6px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 24px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-sec);
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { background: var(--card-bg); color: var(--text-pri); }
+.nav-item.active {
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-light);
+  border-left-color: var(--gold);
+}
+.nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.main { flex: 1; overflow-x: hidden; }
+.topbar {
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,22,40,0.8);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--text-pri);
+}
+.date-badge {
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+}
+.content { padding: 28px 32px; }
+/* Section visibility */
+.section { display: none; }
+.section.active { display: block; }
+/* Metric cards */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.metric-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: all 0.2s;
+}
+.metric-card:hover { background: var(--card-hover); border-color: var(--border-bright); }
+.metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 8px; }
+.metric-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text-pri); line-height: 1; }
+.metric-delta { font-size: 12px; margin-top: 6px; }
+.delta-up { color: var(--teal-light); }
+.delta-dn { color: var(--coral); }
+.delta-neu { color: var(--text-dim); }
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+.card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  color: var(--gold-light);
+}
+.card-meta { font-size: 11px; color: var(--text-dim); }
+/* Two column */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+/* Table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th {
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.data-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-sec);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { color: var(--text-pri); max-width: 260px; }
+/* Bar inline */
+.bar-cell { min-width: 80px; }
+.inline-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 4px; }
+.inline-fill { height: 100%; border-radius: 2px; }
+.fill-gold { background: var(--gold); }
+.fill-teal { background: var(--teal); }
+.fill-coral { background: var(--coral); }
+.fill-sky { background: var(--sky); }
+/* Tags */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: 'DM Mono', monospace;
+}
+.tag-gold { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+.tag-teal { background: rgba(42,157,143,0.15); color: var(--teal-light); }
+.tag-coral { background: rgba(231,111,81,0.15); color: #f4a48a; }
+.tag-sky { background: rgba(107,163,190,0.15); color: #98c5db; }
+.tag-green { background: rgba(80,200,120,0.12); color: #7dd9a4; }
+/* Sparkline bars */
+.sparkline { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
+.spark-b { border-radius: 2px 2px 0 0; min-width: 12px; flex: 1; transition: opacity 0.2s; }
+.spark-b:hover { opacity: 0.8; }
+/* Signal rows */
+.signal-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.signal-item:last-child { border-bottom: none; }
+.signal-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  margin-top: 5px; flex-shrink: 0;
+}
+.dot-hot { background: var(--coral); box-shadow: 0 0 6px var(--coral); }
+.dot-warm { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.dot-cool { background: var(--sky); }
+.signal-text { flex: 1; font-size: 13px; color: var(--text-sec); }
+.signal-text strong { color: var(--text-pri); font-weight: 500; }
+.signal-num { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+/* Post items */
+.post-item {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: flex-start;
+}
+.post-item:last-child { border-bottom: none; }
+.post-rank {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--border-bright);
+  width: 24px;
+  flex-shrink: 0;
+  line-height: 1;
+  padding-top: 2px;
+}
+.post-body { flex: 1; }
+.post-title { font-size: 13px; color: var(--text-pri); margin-bottom: 4px; line-height: 1.4; }
+.post-meta { font-size: 11px; color: var(--text-dim); display: flex; gap: 12px; flex-wrap: wrap; }
+.post-stat { font-family: 'DM Mono', monospace; }
+/* Chart container */
+.chart-wrap { position: relative; height: 160px; margin-top: 8px; }
+canvas { width: 100% !important; height: 160px !important; }
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .two-col { grid-template-columns: 1fr; }
+  .content { padding: 20px 16px; }
+  .topbar { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="logo">
+      <div class="logo-name">GHY<br>International</div>
+      <div class="logo-sub">Marketing Dashboard</div>
+    </div>
+    <div class="nav-label">Overview</div>
+    <a class="nav-item active" href="#overview" data-section="overview">
+      <span class="nav-icon">◈</span> Summary
+    </a>
+    <div class="nav-label" style="margin-top:12px">Channels</div>
+    <a class="nav-item" href="#campaigns" data-section="campaigns">
+      <span class="nav-icon">✉</span> Email Campaigns
+    </a>
+    <a class="nav-item" href="#website" data-section="website">
+      <span class="nav-icon">◉</span> Website & Search
+    </a>
+    <a class="nav-item" href="#linkedin" data-section="linkedin">
+      <span class="nav-icon">▣</span> LinkedIn
+    </a>
+    <div class="nav-label" style="margin-top:12px">Activity</div>
+    <a class="nav-item" href="#events" data-section="events">
+      <span class="nav-icon">◷</span> Events
+    </a>
+    <div class="sidebar-footer">
+      Data through Apr 13, 2026<br>
+      GA4 · MailerLite · LinkedIn
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="page-title" id="page-heading">Summary Overview</div>
+      <div class="date-badge">Mar 1 – Apr 13, 2026</div>
+    </div>
+
+    <div class="content">
+
+      <!-- OVERVIEW -->
+      <div class="section active" id="sec-overview">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">GA4 Active Users</div>
+            <div class="metric-val">37,949</div>
+            <div class="metric-delta delta-up">↑ Mar 1 – Apr 13</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">New Users</div>
+            <div class="metric-val">34,754</div>
+            <div class="metric-delta delta-neu">92% new traffic</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Avg Engagement</div>
+            <div class="metric-val">40s</div>
+            <div class="metric-delta delta-neu">per active user</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Weekly Roundup Subs</div>
+            <div class="metric-val">12,295</div>
+            <div class="metric-delta delta-up">↑ Daily list: 281</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">LinkedIn New Follows</div>
+            <div class="metric-val">+97</div>
+            <div class="metric-delta delta-up">Jan 12 – Apr 11</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Best Open Rate</div>
+            <div class="metric-val">29.4%</div>
+            <div class="metric-delta delta-up">Weekly, Mar 6</div>
+          </div>
+        </div>
+
+        <!-- Buying Signals -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Top Buying Signals — Digital Data</div>
+            <div class="card-meta">What your data is telling you</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-hot"></div>
+            <div class="signal-text"><strong>Section 232 tariff content is dominating organic search.</strong> The aluminum/steel/copper page drew 2,032 organic clicks from 109,804 impressions — your #1 content asset. Avg engagement: 88 sec. These are people actively trying to understand duty exposure.</div>
+            <div class="signal-num">2,032 clicks</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-hot"></div>
+            <div class="signal-text"><strong>PAPS/PARS Tracker is your highest-traffic page.</strong> 35,910 views, 2,894 active users — far above all other pages. This is a strong retention and re-engagement hook with existing clients and prospects.</div>
+            <div class="signal-num">35,910 views</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-warm"></div>
+            <div class="signal-text"><strong>Weekly Roundup open rates peaked Mar 6 &amp; Mar 13</strong> (29.4% and 29.1%) — both during peak tariff news weeks. Your audience opens when trade urgency is high. These weeks saw 3,500–3,600 opens from ~12,300 sent.</div>
+            <div class="signal-num">29.4% open</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-warm"></div>
+            <div class="signal-text"><strong>LinkedIn Section 232 post (Apr 3) hit 1,744 impressions with 7.3% engagement</strong> — your top performing post in the window. Full-customs-value change drove significant interest. 95 clicks, 25 likes, 2 comments.</div>
+            <div class="signal-num">7.3% eng.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-cool"></div>
+            <div class="signal-text"><strong>"Importing a car from Canada to US" drove 621 organic clicks</strong> from 89,617 impressions — high-volume informational traffic. 84-second avg engagement suggests strong intent even if not direct B2B leads.</div>
+            <div class="signal-num">84s avg</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-dot dot-cool"></div>
+            <div class="signal-text"><strong>Trade Updates archive page: 2,449 views, 1,805 unique users.</strong> People are reading back issues — your content library is working as a resource hub, not just a broadcast.</div>
+            <div class="signal-num">2,449 views</div>
+          </div>
+        </div>
+
+        <!-- Top pages summary -->
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Top Pages (Mar–Apr)</div>
+            </div>
+            <table class="data-table">
+              <thead><tr><th>Page</th><th style="text-align:right">Views</th></tr></thead>
+              <tbody>
+                <tr><td>PAPS Tracking</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--gold-light)">35,910</td></tr>
+                <tr><td>Home (GHY International)</td><td style="text-align:right;font-family:'DM Mono',monospace">12,290</td></tr>
+                <tr><td>Section 232 Tariffs (Al/Steel/Cu)</td><td style="text-align:right;font-family:'DM Mono',monospace">6,625</td></tr>
+                <tr><td>Trade Updates archive</td><td style="text-align:right;font-family:'DM Mono',monospace">2,449</td></tr>
+                <tr><td>Contact Us</td><td style="text-align:right;font-family:'DM Mono',monospace">2,012</td></tr>
+                <tr><td>LOGIN</td><td style="text-align:right;font-family:'DM Mono',monospace">1,506</td></tr>
+                <tr><td>Tariff Tracker</td><td style="text-align:right;font-family:'DM Mono',monospace">1,250</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Email (Monthly Trend)</div>
+            </div>
+            <table class="data-table">
+              <thead><tr><th>Month</th><th>Campaigns</th><th>Emails Sent</th><th>Open Rate</th></tr></thead>
+              <tbody>
+                <tr><td>Apr 2026*</td><td>7</td><td>25,986</td><td style="color:var(--teal-light)">26.2%</td></tr>
+                <tr><td>Mar 2026</td><td>18</td><td>53,220</td><td style="color:var(--teal-light)">27.0%</td></tr>
+                <tr><td>Feb 2026</td><td>20</td><td>78,170</td><td style="color:var(--gold-light)">30.1%</td></tr>
+                <tr><td>Jan 2026</td><td>20</td><td>79,070</td><td>25.3%</td></tr>
+                <tr><td>Dec 2025</td><td>17</td><td>66,488</td><td>25.4%</td></tr>
+                <tr><td>Nov 2025</td><td>17</td><td>78,473</td><td>26.9%</td></tr>
+                <tr><td>Oct 2025</td><td>20</td><td>82,135</td><td style="color:var(--gold-light)">30.9%</td></tr>
+              </tbody>
+            </table>
+            <div style="font-size:11px;color:var(--text-dim);margin-top:8px">* Apr to date (13 days)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAMPAIGNS -->
+      <div class="section" id="sec-campaigns">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">Weekly Roundup List</div>
+            <div class="metric-val">12,295</div>
+            <div class="metric-delta delta-neu">as of Apr 10</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Daily Update List</div>
+            <div class="metric-val">281</div>
+            <div class="metric-delta delta-up">↑ High-intent segment</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Best Weekly Open</div>
+            <div class="metric-val">29.4%</div>
+            <div class="metric-delta delta-up">Mar 6, 2026</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Best Click Rate</div>
+            <div class="metric-val">6.95%</div>
+            <div class="metric-delta delta-up">Weekly Apr 3</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Daily Avg Open Rate</div>
+            <div class="metric-val">18.0%</div>
+            <div class="metric-delta delta-neu">across all dailies</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Feb Monthly Opens</div>
+            <div class="metric-val">30.1%</div>
+            <div class="metric-delta delta-up">↑ Peak month YTD</div>
+          </div>
+        </div>
+
+        <!-- Weekly Roundups -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Weekly Roundup Performance</div>
+            <div class="card-meta">All sends Mar–Apr 2026</div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date Sent</th>
+                <th>List Size</th>
+                <th>Opened</th>
+                <th>Open Rate</th>
+                <th>Clicked</th>
+                <th>Click Rate</th>
+                <th>Unsubs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Apr 10, 2026</td><td>12,295</td><td>3,041</td>
+                <td><span class="tag tag-teal">24.88%</span></td>
+                <td>646</td><td>5.28%</td><td>10</td>
+              </tr>
+              <tr>
+                <td>Apr 3, 2026</td><td>12,286</td><td>3,460</td>
+                <td><span class="tag tag-gold">28.35%</span></td>
+                <td>848</td><td><strong style="color:var(--gold-light)">6.95%</strong></td><td>7</td>
+              </tr>
+              <tr>
+                <td>Mar 27, 2026</td><td>12,308</td><td>3,388</td>
+                <td><span class="tag tag-teal">27.69%</span></td>
+                <td>457</td><td>3.74%</td><td>15</td>
+              </tr>
+              <tr>
+                <td>Mar 20, 2026</td><td>12,324</td><td>3,020</td>
+                <td><span class="tag tag-teal">24.66%</span></td>
+                <td>404</td><td>3.30%</td><td>15</td>
+              </tr>
+              <tr>
+                <td>Mar 13, 2026</td><td>12,338</td><td>3,571</td>
+                <td><span class="tag tag-gold">29.13%</span></td>
+                <td>510</td><td>4.16%</td><td>14</td>
+              </tr>
+              <tr>
+                <td>Mar 6, 2026</td><td>12,349</td><td>3,606</td>
+                <td><span class="tag tag-gold" style="background:rgba(201,168,76,0.25)">29.36% ↑</span></td>
+                <td>442</td><td>3.60%</td><td>10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Daily Updates -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Daily Update Performance</div>
+            <div class="card-meta">281-subscriber high-intent list · Mar–Apr 2026</div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Date</th><th>Sent</th><th>Opens</th><th>Open Rate</th><th>Clicks</th><th>Click Rate</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Apr 13</td><td>281</td><td>48</td><td>17.14%</td><td>12</td><td>4.29%</td></tr>
+              <tr><td>Apr 8</td><td>281</td><td>52</td><td>18.51%</td><td>7</td><td>2.49%</td></tr>
+              <tr><td>Apr 6</td><td>281</td><td>55</td><td>19.57%</td><td>17</td><td><span class="tag tag-gold">6.05%</span></td></tr>
+              <tr><td>Apr 3</td><td>281</td><td>53</td><td>18.86%</td><td>15</td><td>5.34%</td></tr>
+              <tr><td>Apr 1</td><td>281</td><td>55</td><td>19.57%</td><td>13</td><td>4.63%</td></tr>
+              <tr><td>Mar 31</td><td>281</td><td>47</td><td>16.73%</td><td>5</td><td>1.78%</td></tr>
+              <tr><td>Mar 30</td><td>281</td><td>52</td><td>18.51%</td><td>9</td><td>3.20%</td></tr>
+              <tr><td>Mar 27</td><td>280</td><td>47</td><td>16.79%</td><td>6</td><td>2.14%</td></tr>
+              <tr><td>Mar 26</td><td>280</td><td>46</td><td>16.43%</td><td>8</td><td>2.86%</td></tr>
+              <tr><td>Mar 25</td><td>280</td><td>44</td><td>15.71%</td><td>8</td><td>2.86%</td></tr>
+              <tr><td>Mar 24</td><td>280</td><td>50</td><td>17.86%</td><td>5</td><td>1.79%</td></tr>
+              <tr><td>Mar 23</td><td>280</td><td>52</td><td>18.57%</td><td>8</td><td>2.86%</td></tr>
+              <tr><td>Mar 20</td><td>279</td><td>43</td><td>15.41%</td><td>5</td><td>1.79%</td></tr>
+              <tr><td>Mar 18</td><td>279</td><td>51</td><td>18.28%</td><td>6</td><td>2.15%</td></tr>
+              <tr><td>Mar 13</td><td>277</td><td>51</td><td>18.41%</td><td>11</td><td>3.97%</td></tr>
+              <tr><td>Mar 12</td><td>276</td><td>52</td><td>18.84%</td><td>7</td><td>2.54%</td></tr>
+              <tr><td>Mar 11</td><td>276</td><td>56</td><td><span class="tag tag-gold">20.36%</span></td><td>8</td><td>2.91%</td></tr>
+              <tr><td>Mar 6</td><td>276</td><td>45</td><td>16.30%</td><td>6</td><td>2.17%</td></tr>
+              <tr><td>Mar 2</td><td>276</td><td>42</td><td>15.22%</td><td>4</td><td>1.45%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Monthly trend -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Monthly Send Volume &amp; Open Rate Trend</div>
+            <div class="card-meta">May 2025 – Apr 2026 (to date)</div>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Month</th><th>Campaigns</th><th>Emails Sent</th><th>Opened</th><th>Open Rate</th><th>Click Rate</th><th>Unsubs</th></tr></thead>
+            <tbody>
+              <tr><td>Apr 2026*</td><td>7</td><td>25,986</td><td>6,764</td><td style="color:var(--teal-light)">26.18%</td><td>6.03%</td><td>17</td></tr>
+              <tr><td>Mar 2026</td><td>18</td><td>53,220</td><td>14,263</td><td>26.95%</td><td>3.61%</td><td>54</td></tr>
+              <tr><td>Feb 2026</td><td>20</td><td>78,170</td><td>23,351</td><td style="color:var(--gold-light)">30.05%</td><td>4.13%</td><td>85</td></tr>
+              <tr><td>Jan 2026</td><td>20</td><td>79,070</td><td>19,874</td><td>25.28%</td><td>3.75%</td><td>134</td></tr>
+              <tr><td>Dec 2025</td><td>17</td><td>66,488</td><td>16,812</td><td>25.44%</td><td>3.83%</td><td>114</td></tr>
+              <tr><td>Nov 2025</td><td>17</td><td>78,473</td><td>20,899</td><td>26.91%</td><td>3.39%</td><td>148</td></tr>
+              <tr><td>Oct 2025</td><td>20</td><td>82,135</td><td>25,159</td><td style="color:var(--gold-light)">30.90%</td><td>4.52%</td><td>135</td></tr>
+              <tr><td>Sep 2025</td><td>18</td><td>54,906</td><td>15,282</td><td>28.02%</td><td>4.11%</td><td>78</td></tr>
+              <tr><td>Aug 2025</td><td>20</td><td>81,074</td><td>21,186</td><td>26.30%</td><td>4.11%</td><td>129</td></tr>
+              <tr><td>Jul 2025</td><td>22</td><td>56,439</td><td>14,321</td><td>25.53%</td><td>4.35%</td><td>84</td></tr>
+              <tr><td>Jun 2025</td><td>15</td><td>67,721</td><td>13,983</td><td style="color:var(--coral)">20.76%</td><td>3.17%</td><td>39</td></tr>
+              <tr><td>May 2025</td><td>15</td><td>80,735</td><td>21,357</td><td>26.63%</td><td>4.40%</td><td>40</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px">* Apr partial — 13 days only</div>
+        </div>
+      </div>
+
+      <!-- WEBSITE & SEARCH -->
+      <div class="section" id="sec-website">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">Active Users (GA4)</div>
+            <div class="metric-val">37,949</div>
+            <div class="metric-delta delta-neu">Mar 1 – Apr 13</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">New Users</div>
+            <div class="metric-val">34,754</div>
+            <div class="metric-delta delta-up">91.6% of total</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Avg Engagement</div>
+            <div class="metric-val">40s</div>
+            <div class="metric-delta delta-neu">per active user</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Top Organic Clicks</div>
+            <div class="metric-val">3,106</div>
+            <div class="metric-delta delta-up">Homepage / branded</div>
+          </div>
+        </div>
+
+        <!-- Traffic acquisition -->
+        <div class="card" id="traffic-card" style="border-color:#c9a84c;box-shadow:0 0 0 2px rgba(201,168,76,0.4)">
+          <div class="card-header">
+            <div class="card-title">Where New Users Come From</div>
+            <div class="card-meta">All sessions · Mar 1 – Apr 14, 2026</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+            <div>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Channel</th><th>Sessions</th><th>Eng. Rate</th><th>Avg Eng. Time</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong style="color:var(--text-pri)">Organic Search</strong></td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--gold-light)">33,697</td>
+                    <td>51.1%</td><td>33s</td>
+                  </tr>
+                  <tr>
+                    <td>Direct</td>
+                    <td style="font-family:'DM Mono',monospace">28,652</td>
+                    <td style="color:var(--coral)">24.0%</td><td>12s</td>
+                  </tr>
+                  <tr>
+                    <td>Referral</td>
+                    <td style="font-family:'DM Mono',monospace">2,771</td>
+                    <td>45.5%</td><td>30s</td>
+                  </tr>
+                  <tr>
+                    <td>Unassigned</td>
+                    <td style="font-family:'DM Mono',monospace">432</td>
+                    <td>25.7%</td><td>18s</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td style="font-family:'DM Mono',monospace">327</td>
+                    <td style="color:var(--coral)">2.8%</td><td>&lt;1s</td>
+                  </tr>
+                  <tr>
+                    <td>Organic Social</td>
+                    <td style="font-family:'DM Mono',monospace">202</td>
+                    <td>44.1%</td><td>34s</td>
+                  </tr>
+                  <tr>
+                    <td>Paid Other</td>
+                    <td style="font-family:'DM Mono',monospace">11</td>
+                    <td>36.4%</td><td>1s</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px">Share of sessions</div>
+              <div id="channel-bars"></div>
+              <div style="margin-top:16px;padding:12px 14px;background:rgba(231,111,81,0.06);border:1px solid rgba(231,111,81,0.2);border-radius:8px;font-size:12px;color:var(--text-sec)">
+                <strong style="color:#f4a48a">Note on Email sessions (327, 2.8% eng.):</strong> GA4 is recording very low engagement time (&lt;1s) from email clicks — likely a UTM tagging or redirect issue in MailerLite. Email is almost certainly driving more engaged visits than this suggests. Worth auditing your campaign link tracking.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top landing pages from organic search -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Top Organic Landing Pages</div>
+            <div class="card-meta">Google Search · Mar 1 – Apr 13, 2026</div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Organic Clicks</th>
+                <th>Impressions</th>
+                <th>CTR</th>
+                <th>Avg Position</th>
+                <th>Eng. Rate</th>
+                <th>Avg Eng. Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>/ (Homepage)</td><td>3,106</td><td>48,175</td>
+                <td>6.4%</td><td>4.2</td><td>60.5%</td>
+                <td style="color:var(--gold-light)">51s</td>
+              </tr>
+              <tr>
+                <td>/paps-tracking/</td><td>3,005</td><td>28,118</td>
+                <td style="color:var(--teal-light)">10.7%</td><td>4.5</td><td>46.2%</td><td>26s</td>
+              </tr>
+              <tr>
+                <td>Section 232 Al/Steel/Cu — Full Customs Value</td><td style="color:var(--gold-light)">2,032</td><td>109,804</td>
+                <td>1.9%</td><td>6.3</td><td>62.0%</td>
+                <td style="color:var(--gold-light)">88s ↑</td>
+              </tr>
+              <tr>
+                <td>Importing a Car from Canada to US</td><td>621</td><td>89,617</td>
+                <td>0.7%</td><td>5.3</td><td>55.5%</td>
+                <td style="color:var(--gold-light)">84s</td>
+              </tr>
+              <tr>
+                <td>US 10% Section 122 Tariff</td><td>375</td><td>67,800</td>
+                <td>0.6%</td><td>6.2</td><td>59.5%</td><td>45s</td>
+              </tr>
+              <tr>
+                <td>Contact Us</td><td>349</td><td>16,650</td>
+                <td>2.1%</td><td>3.8</td><td>53.7%</td><td>31s</td>
+              </tr>
+              <tr>
+                <td>Canada Official EV Quota — China</td><td>299</td><td>48,883</td>
+                <td>0.6%</td><td>5.0</td><td>48.3%</td><td>48s</td>
+              </tr>
+              <tr>
+                <td>Steel/Aluminum Guidance — CBP</td><td>240</td><td>46,984</td>
+                <td>0.5%</td><td>6.6</td><td>66.8%</td><td>48s</td>
+              </tr>
+              <tr>
+                <td>Canada Steel Derivative Surtax Remission</td><td>225</td><td>8,432</td>
+                <td style="color:var(--teal-light)">2.7%</td><td>5.0</td><td style="color:var(--teal-light)">71.9%</td>
+                <td style="color:var(--gold-light)">70s</td>
+              </tr>
+              <tr>
+                <td>CBSA Updates US Surtax Remission</td><td>177</td><td>11,282</td>
+                <td>1.6%</td><td>5.9</td><td style="color:var(--teal-light)">68.3%</td>
+                <td style="color:var(--gold-light)">90s ↑</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Top search queries -->
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Top Search Queries</div>
+              <div class="card-meta">Branded vs topic</div>
+            </div>
+            <table class="data-table">
+              <thead><tr><th>Query</th><th>Clicks</th><th>CTR</th></tr></thead>
+              <tbody>
+                <tr><td>ghy paps tracker</td><td>757</td><td style="color:var(--gold-light)">94.0%</td></tr>
+                <tr><td>ghy</td><td>713</td><td>3.5%</td></tr>
+                <tr><td>ghy international</td><td>616</td><td style="color:var(--teal-light)">54.1%</td></tr>
+                <tr><td>ghy paps</td><td>597</td><td style="color:var(--teal-light)">88.7%</td></tr>
+                <tr><td>ghy pars tracker</td><td>565</td><td>50.0%</td></tr>
+                <tr><td>ghy pars tracking</td><td>466</td><td>51.5%</td></tr>
+                <tr><td>ghy pars</td><td>312</td><td>72.2%</td></tr>
+                <tr><td>ghy customs broker</td><td>143</td><td>55.4%</td></tr>
+                <tr><td>section 232 tariffs</td><td>44</td><td>2.5%</td></tr>
+                <tr><td>canada china ev import</td><td>50</td><td>0.8%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Top pages by views -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Top Pages by Views</div>
+              <div class="card-meta">All traffic sources</div>
+            </div>
+            <div>
+              <div style="margin-bottom:10px" id="bars-pages"></div>
+            </div>
+            <table class="data-table">
+              <thead><tr><th>Page</th><th>Views</th><th>Bounce</th></tr></thead>
+              <tbody>
+                <tr><td>PAPS Tracking</td><td>35,910</td><td>54.5%</td></tr>
+                <tr><td>GHY International (home)</td><td>12,290</td><td>54.6%</td></tr>
+                <tr><td>Sect. 232 Al/Steel/Cu (updated)</td><td>6,625</td><td>50.3%</td></tr>
+                <tr><td>404 / Page not found</td><td style="color:var(--coral)">2,558</td><td style="color:var(--coral)">95.1%</td></tr>
+                <tr><td>Trade Updates archive</td><td>2,449</td><td>58.9%</td></tr>
+                <tr><td>Contact Us</td><td>2,012</td><td style="color:var(--teal-light)">31.1%</td></tr>
+                <tr><td>Tariff Tracker</td><td>1,250</td><td>43.3%</td></tr>
+                <tr><td>Canadian Customs Brokerage</td><td>644</td><td style="color:var(--teal-light)">13.7%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINKEDIN -->
+      <div class="section" id="sec-linkedin">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">New Followers (Jan–Apr)</div>
+            <div class="metric-val">+97</div>
+            <div class="metric-delta delta-up">Jan 12 – Apr 11, 2026</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Top Post Impressions</div>
+            <div class="metric-val">2,625</div>
+            <div class="metric-delta delta-up">ICPA Conference (Mar 3)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Best Engagement Rate</div>
+            <div class="metric-val">13.2%</div>
+            <div class="metric-delta delta-up">CEO Podcast (Mar 30)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Top Audience: Function</div>
+            <div class="metric-val">Ops</div>
+            <div class="metric-delta delta-neu">1,241 followers</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Top Audience: Industry</div>
+            <div class="metric-val">T&amp;L</div>
+            <div class="metric-delta delta-neu">Transport / Logistics: 936</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Top City</div>
+            <div class="metric-val">WPG</div>
+            <div class="metric-delta delta-neu">Winnipeg: 605 followers</div>
+          </div>
+        </div>
+
+        <!-- Top performing posts -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Top LinkedIn Posts by Engagement</div>
+            <div class="card-meta">Mar–Apr 2026 · Organic only</div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">1</div>
+            <div class="post-body">
+              <div class="post-title">CEO Podcast — Simply Trade, leadership &amp; culture (Mar 30)</div>
+              <div class="post-meta">
+                <span class="post-stat">1,040 impressions</span>
+                <span class="post-stat" style="color:var(--gold-light)">13.2% engagement</span>
+                <span class="post-stat">105 clicks · 29 likes</span>
+                <span class="tag tag-gold">Top performer</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">2</div>
+            <div class="post-body">
+              <div class="post-title">Bob Cowie retirement event invite (Apr 1)</div>
+              <div class="post-meta">
+                <span class="post-stat">2,455 impressions</span>
+                <span class="post-stat" style="color:var(--teal-light)">7.7% engagement</span>
+                <span class="post-stat">121 clicks · 63 likes · 3 comments</span>
+                <span class="tag tag-teal">High reach</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">3</div>
+            <div class="post-body">
+              <div class="post-title">Section 232 Full-Value Tariffs — What it means (Apr 3)</div>
+              <div class="post-meta">
+                <span class="post-stat">1,744 impressions</span>
+                <span class="post-stat" style="color:var(--teal-light)">7.3% engagement</span>
+                <span class="post-stat">95 clicks · 25 likes · 5 reposts</span>
+                <span class="tag tag-gold">Top buying signal</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">4</div>
+            <div class="post-body">
+              <div class="post-title">CUSMA Workshops — Toronto series with Mackenzie West (Feb 18)</div>
+              <div class="post-meta">
+                <span class="post-stat">1,686 impressions</span>
+                <span class="post-stat" style="color:var(--teal-light)">10.5% engagement</span>
+                <span class="post-stat">140 clicks · 35 likes</span>
+                <span class="tag tag-teal">Event driver</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">5</div>
+            <div class="post-body">
+              <div class="post-title">AMS2026 Manufacturing Summit — Calgary (Mar 19)</div>
+              <div class="post-meta">
+                <span class="post-stat">1,776 impressions</span>
+                <span class="post-stat">9.1% engagement</span>
+                <span class="post-stat">111 clicks · 45 likes · 4 reposts</span>
+                <span class="tag tag-sky">Event presence</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">6</div>
+            <div class="post-body">
+              <div class="post-title">ICPA Conference, San Antonio — Alan Dewar &amp; Bruno Biondi (Mar 3)</div>
+              <div class="post-meta">
+                <span class="post-stat">2,625 impressions</span>
+                <span class="post-stat">8.1% engagement</span>
+                <span class="post-stat">139 clicks · 68 likes · 3 comments</span>
+                <span class="tag tag-sky">Highest reach post</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">7</div>
+            <div class="post-body">
+              <div class="post-title">Rhonda Galbraith promotion — Director NATS (Mar 9)</div>
+              <div class="post-meta">
+                <span class="post-stat">2,078 impressions</span>
+                <span class="post-stat">6.3% engagement</span>
+                <span class="post-stat">65 clicks · 59 likes · 7 comments</span>
+                <span class="tag tag-sky">Culture / people</span>
+              </div>
+            </div>
+          </div>
+          <div class="post-item">
+            <div class="post-rank">8</div>
+            <div class="post-body">
+              <div class="post-title">TPM26 Conference — Long Beach (Mar 4)</div>
+              <div class="post-meta">
+                <span class="post-stat">1,475 impressions</span>
+                <span class="post-stat">10.0% engagement</span>
+                <span class="post-stat">92 clicks · 52 likes</span>
+                <span class="tag tag-sky">Event presence</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audience breakdown -->
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Followers by Job Function</div></div>
+            <table class="data-table">
+              <thead><tr><th>Function</th><th>Followers</th><th></th></tr></thead>
+              <tbody id="func-rows"></tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Followers by Top Industry</div></div>
+            <table class="data-table">
+              <thead><tr><th>Industry</th><th>Followers</th><th></th></tr></thead>
+              <tbody id="ind-rows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Follower growth chart -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">New Follower Growth — Daily (Jan 12 – Apr 11, 2026)</div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="follower-chart"></canvas>
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:10px">Organic followers only. All growth is organic — no sponsored follows.</div>
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="section" id="sec-events">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">Events (Jan–Apr 2026)</div>
+            <div class="metric-val">8+</div>
+            <div class="metric-delta delta-neu">confirmed from LI data</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Event Types</div>
+            <div class="metric-val">Mixed</div>
+            <div class="metric-delta delta-neu">Workshops · Conferences · Summits</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Events — As Documented in LinkedIn Activity</div>
+            <div class="card-meta">Extracted from post content · Jan–Apr 2026</div>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Date</th><th>Event</th><th>Location</th><th>GHY Presence</th><th>Type</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Apr 9, 2026</td>
+                <td>CIFFA CAPC Customs Training Program</td>
+                <td>—</td>
+                <td>Maria Dasilva (promoter)</td>
+                <td><span class="tag tag-sky">Partner</span></td>
+              </tr>
+              <tr>
+                <td>Mar 26–27, 2026</td>
+                <td>Tariff to Trade Confidence Workshops (CME AB)</td>
+                <td>Calgary (MRU) · Lethbridge (Poly)</td>
+                <td>GHY hosted</td>
+                <td><span class="tag tag-gold">GHY Workshop</span></td>
+              </tr>
+              <tr>
+                <td>Mar 19, 2026</td>
+                <td>Advanced Manufacturing Summit 2026 (AMS2026)</td>
+                <td>SAIT, Calgary</td>
+                <td>Maria Dasilva</td>
+                <td><span class="tag tag-teal">Conference</span></td>
+              </tr>
+              <tr>
+                <td>Mar 5–12, 2026</td>
+                <td>CUSMA Compliance Workshops (Toronto Board of Trade)</td>
+                <td>Toronto · Ottawa</td>
+                <td>Mackenzie West (speaker)</td>
+                <td><span class="tag tag-gold">GHY Speaker</span></td>
+              </tr>
+              <tr>
+                <td>Mar 4–5, 2026</td>
+                <td>Trans-Pacific Maritime Conference (TPM26)</td>
+                <td>Long Beach, CA</td>
+                <td>Chris Bachinski · Mackenzie West</td>
+                <td><span class="tag tag-teal">Conference</span></td>
+              </tr>
+              <tr>
+                <td>Mar 3–4, 2026</td>
+                <td>ICPA Annual Conference 2026</td>
+                <td>San Antonio, TX</td>
+                <td>Alan Dewar · Bruno Biondi (exhibiting)</td>
+                <td><span class="tag tag-teal">Conference</span></td>
+              </tr>
+              <tr>
+                <td>Feb 10–19, 2026</td>
+                <td>CUSMA Compliance Workshops (ON series)</td>
+                <td>Niagara · Windsor · Vaughan</td>
+                <td>Mackenzie West (speaker)</td>
+                <td><span class="tag tag-gold">GHY Speaker</span></td>
+              </tr>
+              <tr>
+                <td>Jan 28, 2026</td>
+                <td>Made in Manitoba B2B Summit (CME)</td>
+                <td>Winnipeg</td>
+                <td>Mackenzie West · Rhonda Galbraith · Samantha Krist</td>
+                <td><span class="tag tag-teal">Conference</span></td>
+              </tr>
+              <tr>
+                <td>Apr 24, 2026</td>
+                <td>Bob Cowie Retirement Celebration</td>
+                <td>Winnipeg (TBC)</td>
+                <td>All-staff / clients invited · RSVP Apr 15</td>
+                <td><span class="tag tag-sky">Internal / Client</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:16px;padding:12px 14px;background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text-sec)">
+            <strong style="color:var(--gold-light)">Note:</strong> To populate this section with full registration numbers, attendance, and leads generated, add your event data from any CRM or registration system (Eventbrite, HubSpot, etc.) and re-upload.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+
+
+// Traffic channel bars
+const channels = [
+  { label: 'Organic Search', sessions: 33697, color: '#c9a84c' },
+  { label: 'Direct',         sessions: 28652, color: '#6ba3be' },
+  { label: 'Referral',       sessions: 2771,  color: '#2a9d8f' },
+  { label: 'Unassigned',     sessions: 432,   color: '#5c6880' },
+  { label: 'Email',          sessions: 327,   color: '#e76f51' },
+  { label: 'Organic Social', sessions: 202,   color: '#9b72cf' },
+];
+function renderChannelBars() {
+  const el = document.getElementById('channel-bars');
+  if (!el || el.dataset.rendered) return;
+  const totalSessions = channels.reduce((s,c) => s + c.sessions, 0);
+  el.innerHTML = channels.map(c => {
+    const pct = (c.sessions / totalSessions * 100).toFixed(1);
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="color:var(--text-sec)">${c.label}</span>
+        <span style="font-family:'DM Mono',monospace;color:var(--text-dim)">${pct}% &nbsp; ${c.sessions.toLocaleString()}</span>
+      </div>
+      <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${c.color};border-radius:3px"></div>
+      </div>
+    </div>`;
+  }).join('');
+  el.dataset.rendered = '1';
+}
+
+// Nav — event listeners instead of inline onclick (SharePoint compatible)
+const headings = {
+  overview: 'Summary Overview',
+  campaigns: 'Email Campaigns',
+  website: 'Website & Search',
+  linkedin: 'LinkedIn',
+  events: 'Events'
+};
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+  const navEl = document.querySelector('.nav-item[data-section="' + id + '"]');
+  if (navEl) navEl.classList.add('active');
+  const h = document.getElementById('page-heading');
+  if (h) h.textContent = headings[id] || id;
+  if (id === 'website') renderChannelBars();
+}
+
+document.querySelectorAll('.nav-item[data-section]').forEach(function(el) {
+  el.addEventListener('click', function(e) {
+    e.preventDefault();
+    showSection(this.getAttribute('data-section'));
+  });
+});
+
+// Follower chart
+const followerDates = ['Jan 12','Jan 13','Jan 14','Jan 15','Jan 16','Jan 17','Jan 18','Jan 19','Jan 20','Jan 21','Jan 22','Jan 23','Jan 24','Jan 25','Jan 26','Jan 27','Jan 28','Jan 29','Jan 30','Jan 31','Feb 1','Feb 2','Feb 3','Feb 4','Feb 5','Feb 6','Feb 7','Feb 8','Feb 9','Feb 10','Feb 11','Feb 12','Feb 13','Feb 14','Feb 15','Feb 16','Feb 17','Feb 18','Feb 19','Feb 20','Feb 21','Feb 22','Feb 23','Feb 24','Feb 25','Feb 26','Feb 27','Feb 28','Mar 1','Mar 2','Mar 3','Mar 4','Mar 5','Mar 6','Mar 7','Mar 8','Mar 9','Mar 10','Mar 11','Mar 12','Mar 13','Mar 14','Mar 15','Mar 16','Mar 17','Mar 18','Mar 19','Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6','Apr 7','Apr 8','Apr 9','Apr 10','Apr 11'];
+const followerVals = [2,3,4,2,0,1,1,2,1,2,3,5,1,2,2,-1,2,2,0,1,0,0,0,2,2,5,2,1,0,2,1,0,0,2,0,0,1,2,4,3,3,2,3,1,0,6,1,3,2,1,3,4,3,1,2,1,0,4,1,3,3,1,1,0,5,1,6,6,3,2,2,3,0,2,1,2,2,5,2,2,3,5,1,1,2,3,3,5,0,1];
+
+const ctx = document.getElementById('follower-chart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: followerDates,
+    datasets: [{
+      data: followerVals,
+      backgroundColor: followerVals.map(v => v >= 5 ? '#c9a84c' : v >= 3 ? '#2a9d8f' : 'rgba(107,163,190,0.45)'),
+      borderRadius: 2,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: {
+      backgroundColor: '#132040',
+      titleColor: '#c9a84c',
+      bodyColor: '#9ba8bb',
+      borderColor: 'rgba(201,168,76,0.3)',
+      borderWidth: 1,
+      callbacks: { label: ctx => '+' + ctx.parsed.y + ' followers' }
+    }},
+    scales: {
+      x: { ticks: { color: '#5c6880', font: { size: 9 }, maxTicksLimit: 15 }, grid: { display: false } },
+      y: { ticks: { color: '#5c6880', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
+    }
+  }
+});
+
+// LinkedIn audience tables
+const funcData = [['Operations',1241],['Sales',697],['Business Development',638],['Information Technology',183],['Finance',160],['Human Resources',147],['Marketing',145],['Customer Success',141],['Purchasing',140]];
+const indData = [['Transport, Logistics, SCM',936],['Truck Transportation',233],['Wholesale Import/Export',205],['International Trade',203],['IT Services',128],['Software Development',125],['Business Consulting',114],['Appliances & Electronics',100]];
+
+const max1 = funcData[0][1];
+document.getElementById('func-rows').innerHTML = funcData.map(([n,v]) =>
+  `<tr><td>${n}</td><td style="font-family:'DM Mono',monospace">${v}</td><td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:${Math.round(v/max1*100)}%"></div></div></td></tr>`
+).join('');
+
+const max2 = indData[0][1];
+document.getElementById('ind-rows').innerHTML = indData.map(([n,v]) =>
+  `<tr><td>${n}</td><td style="font-family:'DM Mono',monospace">${v}</td><td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-gold" style="width:${Math.round(v/max2*100)}%"></div></div></td></tr>`
+).join('');
+</script>
+</body>
+</html>
