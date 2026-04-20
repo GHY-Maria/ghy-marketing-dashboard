@@ -465,12 +465,12 @@ canvas { width: 100% !important; height: 160px !important; }
         <div class="metrics-row">
           <div class="metric-card">
             <div class="metric-label">Total Campaigns (YTD)</div>
-            <div class="metric-val">49</div>
+            <div class="metric-val">69</div>
             <div class="metric-delta delta-up">Jan–Apr 2026</div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Total Emails Sent (YTD)</div>
-            <div class="metric-val">170,506</div>
+            <div class="metric-val">249,576</div>
             <div class="metric-delta delta-neu">Jan–Apr 2026</div>
           </div>
           <div class="metric-card">
@@ -479,9 +479,9 @@ canvas { width: 100% !important; height: 160px !important; }
             <div class="metric-delta delta-up">Feb 2026</div>
           </div>
           <div class="metric-card">
-            <div class="metric-label">Apr Clicks (to date)</div>
-            <div class="metric-val">2,085</div>
-            <div class="metric-delta delta-up">↑ 5.36% click rate</div>
+            <div class="metric-label">Total Unsubs (YTD)</div>
+            <div class="metric-val">294</div>
+            <div class="metric-delta delta-neu">&lt;0.12% of sends</div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Daily Avg Open Rate</div>
@@ -585,18 +585,168 @@ canvas { width: 100% !important; height: 160px !important; }
         <!-- Monthly trend -->
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Monthly Send Volume &amp; Open Rate Trend</div>
-            <div class="card-meta">Jan–Apr 2026 (MailerLite)</div>
+            <div class="card-title">Monthly Send Summary — Jan 1 to Apr 20, 2026</div>
+            <div class="card-meta">MailerLite · all campaigns combined</div>
           </div>
           <table class="data-table">
-            <thead><tr><th>Month</th><th>Campaigns</th><th>Emails Sent</th><th>Opened</th><th>Open Rate</th><th>Click Rate</th><th>Unsubs</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Campaigns</th>
+                <th>Emails Sent</th>
+                <th>Opened</th>
+                <th>Open Rate</th>
+                <th>Clicked</th>
+                <th>Click Rate</th>
+                <th>Unsubs</th>
+                <th>Spam</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>Apr 2026*</td><td>11</td><td>39,116</td><td>10,048</td><td style="color:var(--teal-light)">25.84%</td><td>5.36%</td><td>21</td></tr>
-              <tr><td>Mar 2026</td><td>18</td><td>53,220</td><td>14,285</td><td>26.99%</td><td>3.61%</td><td>54</td></tr>
-              <tr><td>Feb 2026</td><td>20</td><td>78,170</td><td>23,363</td><td style="color:var(--gold-light)">30.06%</td><td>4.13%</td><td>85</td></tr>
+              <tr>
+                <td>Apr 2026*</td><td>11</td><td>39,116</td><td>10,051</td>
+                <td style="color:var(--teal-light)">25.85%</td>
+                <td>2,085</td><td>5.36%</td>
+                <td>21</td><td>0</td>
+              </tr>
+              <tr>
+                <td>Mar 2026</td><td>18</td><td>53,220</td><td>14,285</td>
+                <td>26.99%</td>
+                <td>1,909</td><td>3.61%</td>
+                <td>54</td><td>0</td>
+              </tr>
+              <tr>
+                <td>Feb 2026</td><td>20</td><td>78,170</td><td>23,363</td>
+                <td style="color:var(--gold-light)">30.06%</td>
+                <td>3,210</td><td>4.13%</td>
+                <td>85</td><td>0</td>
+              </tr>
+              <tr>
+                <td>Jan 2026</td><td>20</td><td>79,070</td><td>19,876</td>
+                <td>25.29%</td>
+                <td>2,949</td><td>3.75%</td>
+                <td>134</td><td>0</td>
+              </tr>
             </tbody>
           </table>
-          <div style="font-size:11px;color:var(--text-dim);margin-top:8px">* Apr partial — 20 days</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px">
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--gold-light)">249,576</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total emails sent</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">67,575</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total opens</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">10,153</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total clicks</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--coral)">294</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total unsubs</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:10px">* Apr partial — 20 days only · Unsubscribe rate remains very low (&lt;0.17% monthly)</div>
+        </div>
+
+        <!-- Trade Update Subscriber Growth -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Trade Update Subscriber Growth — Website Form</div>
+            <div class="card-meta">All signups via ghy.com webform · Dec 2021 – Apr 20, 2026 · 2,105 total</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px">Signups by year</div>
+              <table class="data-table">
+                <thead><tr><th>Period</th><th>New Signups</th><th></th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Jan–Apr 2026</td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--teal-light)">210</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:22%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>2025 (full year)</td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--gold-light)">949</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-gold" style="width:100%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>2024 (full year)</td>
+                    <td style="font-family:'DM Mono',monospace">499</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:53%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>2023 (full year)</td>
+                    <td style="font-family:'DM Mono',monospace">231</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:24%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>2022 (full year)</td>
+                    <td style="font-family:'DM Mono',monospace">189</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:20%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Dec 2021</td>
+                    <td style="font-family:'DM Mono',monospace">11</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:1%"></div></div></td>
+                  </tr>
+                  <tr style="border-top:1px solid var(--border-bright)">
+                    <td><strong style="color:var(--text-pri)">All-time total</strong></td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--gold-light)"><strong>2,105</strong></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px">Top signup months (all-time)</div>
+              <table class="data-table">
+                <thead><tr><th>Month</th><th>Signups</th><th></th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Mar 2025</td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--gold-light)">154</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-gold" style="width:100%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Apr 2025</td>
+                    <td style="font-family:'DM Mono',monospace;color:var(--gold-light)">150</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-gold" style="width:97%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Feb 2025</td>
+                    <td style="font-family:'DM Mono',monospace">112</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:73%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Nov 2024</td>
+                    <td style="font-family:'DM Mono',monospace">93</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:60%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Aug 2025</td>
+                    <td style="font-family:'DM Mono',monospace">85</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:55%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Jan 2026</td>
+                    <td style="font-family:'DM Mono',monospace">55</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:36%"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>Feb 2026</td>
+                    <td style="font-family:'DM Mono',monospace">58</td>
+                    <td class="bar-cell"><div class="inline-bar"><div class="inline-fill fill-teal" style="width:38%"></div></div></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="margin-top:14px;padding:12px 14px;background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-sec)">
+                <strong style="color:var(--gold-light)">Key insight:</strong> 2025 saw a 90% surge in new signups vs 2024 (949 vs 499), with March and April 2025 being the two busiest months ever — coinciding with peak tariff news activity. Growth rate has continued strong into 2026 with 210 signups in the first 20 days of Q1–Q2.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
