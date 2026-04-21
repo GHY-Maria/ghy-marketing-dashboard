@@ -427,6 +427,62 @@ canvas { width: 100% !important; height: 160px !important; }
           </div>
         </div>
 
+        <!-- Channel Highlights Row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
+
+          <!-- Email highlight -->
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('campaigns')">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:10px">✉ Email Campaigns</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">YTD Sends</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">249,576</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Best Open Rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">30.1%</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Total Opens</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">67,575</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Total Clicks</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">10,153</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Unsubs YTD</span><span style="font-family:'DM Mono',monospace;color:var(--coral)">294</span></div>
+            </div>
+            <div style="margin-top:11px;font-size:11px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:9px">Feb peak: 30.1% open · 78K sends</div>
+          </div>
+
+          <!-- Website highlight -->
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('website')">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sky);margin-bottom:10px">◉ Website & Search</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Active Users</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">92,042</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">PAPS Page Views</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">108,849</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">#1 Org. Clicks</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">8,159</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Top CTR</span><span style="font-family:'DM Mono',monospace;color:var(--teal-light)">11.1%</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">US + CA Users</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">60,730</span></div>
+            </div>
+            <div style="margin-top:11px;font-size:11px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:9px">Canada: highest avg eng. at 74s</div>
+          </div>
+
+          <!-- LinkedIn highlight -->
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('linkedin')">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal-light);margin-bottom:10px">▣ LinkedIn</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Impressions YTD</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">41,407</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Clicks YTD</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">1,760</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Reactions</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">816</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Best Eng. Rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">12.6%</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">New Followers</span><span style="font-family:'DM Mono',monospace;color:var(--teal-light)">+97</span></div>
+            </div>
+            <div style="margin-top:11px;font-size:11px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:9px">Seth award: 2,905 reach · 111 likes · 39 comments</div>
+          </div>
+
+          <!-- Events + Webinars highlight -->
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('webinars')">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--coral);margin-bottom:10px">◷ Events &amp; ⬡ Webinars</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">LI Events YTD</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">9</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Webinar Registered</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">378</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Attended</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">313</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Show Rate</span><span style="font-family:'DM Mono',monospace;color:var(--teal-light)">82.8%</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Unique Companies</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">245</span></div>
+            </div>
+            <div style="margin-top:11px;font-size:11px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:9px">Jan 13 Steel Surtax Q&A · avg watch 1h 12m</div>
+          </div>
+        </div>
+
         <!-- Top pages summary -->
         <div class="two-col">
           <div class="card">
