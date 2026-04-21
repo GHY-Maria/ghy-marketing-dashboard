@@ -226,6 +226,28 @@ body {
 .tag-coral { background: rgba(231,111,81,0.15); color: #f4a48a; }
 .tag-sky { background: rgba(107,163,190,0.15); color: #98c5db; }
 .tag-green { background: rgba(80,200,120,0.12); color: #7dd9a4; }
+.tag-purple { background: rgba(155,114,207,0.15); color: #c5a8f0; }
+/* Platform section divider */
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-bright);
+}
+.platform-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+}
+.badge-mailerlite { background: rgba(201,168,76,0.15); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); }
+.badge-pipedrive  { background: rgba(155,114,207,0.15); color: #c5a8f0;          border: 1px solid rgba(155,114,207,0.3); }
+.platform-desc { font-size: 12px; color: var(--text-dim); }
 /* Sparkline bars */
 .sparkline { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
 .spark-b { border-radius: 2px 2px 0 0; min-width: 12px; flex: 1; transition: opacity 0.2s; }
@@ -296,8 +318,11 @@ canvas { width: 100% !important; height: 160px !important; }
       <span class="nav-icon">◈</span> Summary
     </a>
     <div class="nav-label" style="margin-top:12px">Channels</div>
-    <a class="nav-item" href="#campaigns" data-section="campaigns">
-      <span class="nav-icon">✉</span> Email Campaigns
+    <a class="nav-item" href="#mailerlite" data-section="mailerlite">
+      <span class="nav-icon">✉</span> MailerLite
+    </a>
+    <a class="nav-item" href="#pipedrive" data-section="pipedrive">
+      <span class="nav-icon">◈</span> Pipedrive Campaigns
     </a>
     <a class="nav-item" href="#website" data-section="website">
       <span class="nav-icon">◉</span> Website & Search
@@ -314,7 +339,7 @@ canvas { width: 100% !important; height: 160px !important; }
     </a>
     <div class="sidebar-footer">
       Data through Apr 20, 2026<br>
-      GA4 · MailerLite · LinkedIn · Teams
+      GA4 · MailerLite · Pipedrive · LinkedIn · Teams
     </div>
   </nav>
 
@@ -329,29 +354,75 @@ canvas { width: 100% !important; height: 160px !important; }
       <!-- OVERVIEW -->
       <div class="section active" id="sec-overview">
 
-        <!-- PAPS Spotlight -->
-        <div style="background:linear-gradient(135deg,rgba(201,168,76,0.12) 0%,rgba(42,157,143,0.08) 100%);border:1px solid rgba(201,168,76,0.35);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
-          <div>
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:6px">⭐ Top Asset Spotlight — PAPS Tracker</div>
-            <div style="font-size:15px;color:var(--text-pri);font-weight:500;margin-bottom:6px">Your #1 traffic driver — 3× more views than the homepage</div>
-            <div style="font-size:13px;color:var(--text-sec)">A daily-use tool for clients and prospects, driving consistent return visits. Users come back an average of 12× — the strongest retention asset on the site.</div>
+        <!-- Cross-Channel Performance Banner -->
+        <div style="background:linear-gradient(135deg,rgba(10,22,40,0.9) 0%,rgba(19,32,64,0.95) 100%);border:1px solid var(--border-bright);border-radius:12px;padding:22px 26px;margin-bottom:20px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px">
+            <div>
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--gold);margin-bottom:5px">Jan 1 – Apr 20, 2026 · All Channels</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text-pri)">Marketing is firing on every channel — tariff urgency is your tailwind</div>
+            </div>
+            <div style="font-size:12px;color:var(--text-dim);flex-shrink:0;margin-left:24px">110 days of data</div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;min-width:280px;flex-shrink:0">
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px;text-align:center">
-              <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--gold-light)">108,849</div>
-              <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Page views</div>
+          <!-- Channel bars -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-bottom:18px">
+            <!-- Email -->
+            <div style="background:var(--navy-mid);padding:16px 18px">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:10px">✉ Email</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Sends YTD</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">249,576</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Best open rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">30.1%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">PD avg open rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">39.8%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Subscriber base</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">2,105</span></div>
+              </div>
+              <div style="margin-top:10px;padding-top:9px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim)">80 campaigns total across both platforms</div>
             </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px;text-align:center">
-              <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--gold-light)">6,156</div>
-              <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Active users</div>
+            <!-- Website -->
+            <div style="background:var(--navy-mid);padding:16px 18px">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sky);margin-bottom:10px">◉ Website</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Active users</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">92,042</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">#1 organic clicks</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">8,159</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">232 tariff clicks</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">2,738</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Contact Us views</span><span style="font-family:'DM Mono',monospace;color:var(--teal-light)">5,180</span></div>
+              </div>
+              <div style="margin-top:10px;padding-top:9px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim)">95.1% new traffic — tariff content dominates search</div>
             </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px;text-align:center">
-              <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal-light)">17.7×</div>
-              <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Views per user</div>
+            <!-- LinkedIn -->
+            <div style="background:var(--navy-mid);padding:16px 18px">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal-light);margin-bottom:10px">▣ LinkedIn</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Impressions</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">41,407</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Clicks</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">1,760</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Best eng. rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">12.6%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">New followers</span><span style="font-family:'DM Mono',monospace;color:var(--teal-light)">+97</span></div>
+              </div>
+              <div style="margin-top:10px;padding-top:9px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim)">Seth award post: 2,905 reach · top reaction content</div>
             </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px;text-align:center">
-              <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal-light)">21s</div>
-              <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Avg engagement</div>
+            <!-- Events -->
+            <div style="background:var(--navy-mid);padding:16px 18px">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--coral);margin-bottom:10px">⬡ Events &amp; Webinars</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Webinar registrants</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">378</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Show rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">82.8%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">Unique companies</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">245</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-dim)">LI events posted</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">9</span></div>
+              </div>
+              <div style="margin-top:10px;padding-top:9px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim)">Avg watch time 1h 12m — high-intent audience</div>
+            </div>
+          </div>
+          <!-- Three headline insights -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:11px 13px;background:rgba(231,111,81,0.07);border:1px solid rgba(231,111,81,0.18);border-radius:8px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--coral);box-shadow:0 0 6px var(--coral);margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--text-sec);line-height:1.5"><strong style="color:var(--text-pri)">Tariff urgency is driving every metric.</strong> Section 232, IEEPA, and surtax content dominates organic search, email engagement, and webinar demand simultaneously.</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:11px 13px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:8px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--text-sec);line-height:1.5"><strong style="color:var(--text-pri)">CRM email is punching above its weight.</strong> Pipedrive campaigns reach just 13K contacts but deliver 39.8% open rates — nearly double MailerLite's mass-send average.</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:11px 13px;background:rgba(42,157,143,0.06);border:1px solid rgba(42,157,143,0.18);border-radius:8px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--text-sec);line-height:1.5"><strong style="color:var(--text-pri)">Webinars are converting at an elite rate.</strong> An 82.8% show rate from 378 registrants — representing 245 unique companies — signals a deeply engaged, high-intent audience.</div>
             </div>
           </div>
         </div>
@@ -431,8 +502,8 @@ canvas { width: 100% !important; height: 160px !important; }
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
 
           <!-- Email highlight -->
-          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('campaigns')">
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:10px">✉ Email Campaigns</div>
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--card-hover)'" onmouseout="this.style.background='var(--card-bg)'" onclick="showSection('mailerlite')">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:10px">✉ Email — MailerLite + Pipedrive</div>
             <div style="display:flex;flex-direction:column;gap:7px">
               <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">YTD Sends</span><span style="font-family:'DM Mono',monospace;color:var(--text-pri)">249,576</span></div>
               <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-sec)">Best Open Rate</span><span style="font-family:'DM Mono',monospace;color:var(--gold-light)">30.1%</span></div>
@@ -519,8 +590,25 @@ canvas { width: 100% !important; height: 160px !important; }
         </div>
       </div>
 
-      <!-- CAMPAIGNS -->
-      <div class="section" id="sec-campaigns">
+      <!-- MAILERLITE -->
+      <div class="section" id="sec-mailerlite">
+
+        <!-- Section intro -->
+        <div style="background:linear-gradient(135deg,rgba(201,168,76,0.10) 0%,rgba(201,168,76,0.03) 100%);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+          <div>
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--gold);margin-bottom:5px">✉ MailerLite — Mass Email Marketing</div>
+            <div style="font-size:15px;font-weight:500;color:var(--text-pri);margin-bottom:4px">Trade Updates · Weekly Roundups · Daily Briefings</div>
+            <div style="font-size:12px;color:var(--text-sec)">Broadcast campaigns to the full subscriber list — ~12,300 to 78,000 recipients per send · Jan 1 – Apr 20, 2026</div>
+          </div>
+          <div style="display:flex;gap:16px;flex-shrink:0">
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--gold-light)">69</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">Campaigns</div></div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--text-pri)">249K</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">Emails Sent</div></div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal-light)">26.6%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">Avg Open Rate</div></div>
+          </div>
+        </div>
+
         <div class="metrics-row">
           <div class="metric-card">
             <div class="metric-label">Total Campaigns (YTD)</div>
@@ -807,6 +895,420 @@ canvas { width: 100% !important; height: 160px !important; }
             </div>
           </div>
         </div>
+
+      </div><!-- /sec-mailerlite -->
+
+      <!-- PIPEDRIVE CAMPAIGNS -->
+      <div class="section" id="sec-pipedrive">
+
+        <!-- Section intro -->
+        <div style="background:linear-gradient(135deg,rgba(155,114,207,0.10) 0%,rgba(155,114,207,0.03) 100%);border:1px solid rgba(155,114,207,0.3);border-radius:12px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+          <div>
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:#c5a8f0;margin-bottom:5px">◈ Pipedrive Campaigns — CRM-Targeted Outreach</div>
+            <div style="font-size:15px;font-weight:500;color:var(--text-pri);margin-bottom:4px">Existing Clients · Warm Prospects · Account Manager Sends</div>
+            <div style="font-size:12px;color:var(--text-sec)">Precision campaigns to targeted CRM contacts — 84 to 3,242 recipients per send · Jan 1 – Apr 20, 2026 + Full Year 2025</div>
+          </div>
+          <div style="display:flex;gap:16px;flex-shrink:0">
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:#c5a8f0">11</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026 Campaigns</div></div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--text-pri)">13K</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">Recipients</div></div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div style="text-align:center"><div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal-light)">39.8%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">Avg Open Rate</div></div>
+          </div>
+        </div>
+
+        <!-- YoY Benchmark -->
+        <div style="background:rgba(155,114,207,0.05);border:1px solid rgba(155,114,207,0.2);border-radius:12px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#c5a8f0;margin-bottom:14px">📊 2025 vs 2026 — Year-over-Year Benchmarks (Jan–Apr comparable)</div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px">
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center">
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Campaigns</div>
+              <div style="display:flex;justify-content:space-around;align-items:center">
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-sec)">27</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2025</div></div>
+                <div style="color:var(--text-dim);font-size:12px">→</div>
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:#c5a8f0">11</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026</div></div>
+              </div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:6px">Fewer, more targeted</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center">
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Recipients</div>
+              <div style="display:flex;justify-content:space-around;align-items:center">
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-sec)">30.3K</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2025</div></div>
+                <div style="color:var(--text-dim);font-size:12px">→</div>
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:#c5a8f0">13.0K</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026</div></div>
+              </div>
+              <div style="font-size:10px;color:var(--coral);margin-top:6px">↓ 57% volume</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center">
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Avg Open Rate</div>
+              <div style="display:flex;justify-content:space-around;align-items:center">
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-sec)">43.8%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2025</div></div>
+                <div style="color:var(--text-dim);font-size:12px">→</div>
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">39.8%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026</div></div>
+              </div>
+              <div style="font-size:10px;color:var(--coral);margin-top:6px">↓ 4 pts (Jan–Apr)</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center">
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Avg Click Rate</div>
+              <div style="display:flex;justify-content:space-around;align-items:center">
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-sec)">8.6%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2025</div></div>
+                <div style="color:var(--text-dim);font-size:12px">→</div>
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">8.1%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026</div></div>
+              </div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:6px">↓ 0.5 pts — stable</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;text-align:center">
+              <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Unsub Rate</div>
+              <div style="display:flex;justify-content:space-around;align-items:center">
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-sec)">0.22%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2025</div></div>
+                <div style="color:var(--text-dim);font-size:12px">→</div>
+                <div><div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">0.32%</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">2026</div></div>
+              </div>
+              <div style="font-size:10px;color:var(--text-dim);margin-top:6px">Still very low</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="padding:10px 14px;background:rgba(42,157,143,0.07);border:1px solid rgba(42,157,143,0.15);border-radius:8px;font-size:12px;color:var(--text-sec)">
+              <strong style="color:var(--teal-light)">2025 full-year context:</strong> 55 campaigns · 53,498 recipients · 44.4% avg open rate · 10.0% avg click rate · 117 unsubs. Peak months were Nov–Dec (54–58% open rates) driven by Welcome to GHY Family and W.G. McKay FTA Renewal campaigns.
+            </div>
+            <div style="padding:10px 14px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:8px;font-size:12px;color:var(--text-sec)">
+              <strong style="color:var(--gold-light)">2026 trend:</strong> Lower volume but open rates remain strong — 39.8% Jan–Apr vs 43.8% same period 2025. The slight dip reflects more operational/tariff-update sends vs the high-urgency bank migration and fee-change campaigns that dominated early 2025. Click rates are stable.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pipedrive 2026 summary metrics -->
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">PD Campaigns (YTD)</div>
+            <div class="metric-val">11</div>
+            <div class="metric-delta delta-neu">Jan–Apr 2026</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Total Recipients</div>
+            <div class="metric-val">13,016</div>
+            <div class="metric-delta delta-neu">across all sends</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Total Opened</div>
+            <div class="metric-val">5,184</div>
+            <div class="metric-delta delta-up">39.8% avg open rate</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Total Clicks</div>
+            <div class="metric-val">1,055</div>
+            <div class="metric-delta delta-up">8.1% avg click rate</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Best Open Rate</div>
+            <div class="metric-val">58.1%</div>
+            <div class="metric-delta delta-up">W.G. McKay FTA Renewal</div>
+          </div>
+        </div>
+
+        <!-- Pipedrive campaign table -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2026 Pipedrive Campaign Performance</div>
+            <div class="card-meta">All campaigns Jan–Apr 2026 · CRM-targeted sends via account managers</div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Campaign / Subject</th>
+                <th style="text-align:right">Sent</th>
+                <th style="text-align:right">Opened</th>
+                <th>Open Rate</th>
+                <th style="text-align:right">Clicked</th>
+                <th>Click Rate</th>
+                <th style="text-align:right">Unsubs</th>
+                <th>Sender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">W.G. McKay 2026 FTA Renewal – 2nd Request</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 4, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">891</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">518</td>
+                <td><span class="tag tag-gold">58.1%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">271</td>
+                <td style="font-family:'DM Mono',monospace;color:var(--gold-light)">30.4%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1</td>
+                <td style="font-size:11px;color:var(--text-dim)">Account mgr</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">Your January CARM Statement – Action Taken by GHY</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 18, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">84</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">43</td>
+                <td><span class="tag tag-teal">51.2%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">3</td>
+                <td style="font-family:'DM Mono',monospace">3.6%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">0</td>
+                <td style="font-size:11px;color:var(--text-dim)">Account mgr</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">GRI 2026 – CA and USA</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Jan 6, 2026 · GHY 2026 Service Fee Adjustments</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">3,242</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1,376</td>
+                <td><span class="tag tag-teal">42.4%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">148</td>
+                <td style="font-family:'DM Mono',monospace">4.6%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">13</td>
+                <td style="font-size:11px;color:var(--text-dim)">Al Dewar</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">Changes to Your CBSA Payment and Invoicing Process</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 18, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">401</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">174</td>
+                <td><span class="tag tag-teal">43.4%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">32</td>
+                <td style="font-family:'DM Mono',monospace">8.0%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1</td>
+                <td style="font-size:11px;color:var(--text-dim)">Carrie / GHY USA</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">Supreme Court Ruling on IEEPA Tariffs and Potential Duty Refunds</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 11, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1,302</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">508</td>
+                <td><span class="tag tag-teal">39.0%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">84</td>
+                <td style="font-family:'DM Mono',monospace">6.5%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">3</td>
+                <td style="font-size:11px;color:var(--text-dim)">Carrie / GHY USA</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">IEEPA Duty Refunds: What You Need to Do</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 16, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1,282</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">473</td>
+                <td><span class="tag tag-teal">36.9%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">65</td>
+                <td style="font-family:'DM Mono',monospace">5.1%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">2</td>
+                <td style="font-size:11px;color:var(--text-dim)">Carrie / GHY USA</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">End of IEEPA, Start of Section 122 Global Tariffs</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 24, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1,308</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">499</td>
+                <td><span class="tag tag-teal">38.1%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">71</td>
+                <td style="font-family:'DM Mono',monospace">5.4%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">4</td>
+                <td style="font-size:11px;color:var(--text-dim)">Carrie / GHY USA</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">What You Don't See in CARM Could Cost You</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 12, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">2,623</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">977</td>
+                <td><span class="tag tag-teal">37.2%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">157</td>
+                <td style="font-family:'DM Mono',monospace">6.0%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">12</td>
+                <td style="font-size:11px;color:var(--text-dim)">Account mgr</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">New U.S. Tariffs on Metals &amp; Pharmaceuticals</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 6, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1,297</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">432</td>
+                <td><span class="tag tag-sky">33.3%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">162</td>
+                <td style="font-family:'DM Mono',monospace;color:var(--teal-light)">12.5%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1</td>
+                <td style="font-size:11px;color:var(--text-dim)">Carrie / GHY USA</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">You May Be Owed Money Back on Steel Derivative Surtax</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 17, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">371</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">125</td>
+                <td><span class="tag tag-sky">33.7%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">39</td>
+                <td style="font-family:'DM Mono',monospace">10.5%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">1</td>
+                <td style="font-size:11px;color:var(--text-dim)">Account mgr</td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:500;color:var(--text-pri);font-size:13px">You May Be Owed Money Back on Canadian Surtaxes (Tariffs)</div>
+                  <div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 25, 2026</div>
+                </td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">215</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">59</td>
+                <td><span class="tag tag-coral">27.4%</span></td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">23</td>
+                <td style="font-family:'DM Mono',monospace">10.7%</td>
+                <td style="text-align:right;font-family:'DM Mono',monospace">3</td>
+                <td style="font-size:11px;color:var(--text-dim)">Account mgr</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pipedrive totals -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px">
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--gold-light)">13,016</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total recipients</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">5,184</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total opens (39.8%)</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">1,055</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total clicks (8.1%)</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--coral)">41</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total unsubs</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;padding:12px 14px;background:rgba(155,114,207,0.06);border:1px solid rgba(155,114,207,0.2);border-radius:8px;font-size:12px;color:var(--text-sec)">
+            <strong style="color:#c5a8f0">Pipedrive vs MailerLite:</strong> Pipedrive campaigns send to highly targeted CRM lists (84–3,242 contacts) and consistently achieve <strong style="color:var(--text-pri)">~2× higher open rates</strong> (39.8% avg) than MailerLite mass sends (26.6% avg). Click rates are also meaningfully higher (8.1% vs ~4.2%), reflecting the personalized targeting and existing client relationships.
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px">Source: Pipedrive Campaigns Insights export · Jan–Apr 20, 2026</div>
+        </div>
+
+        <!-- 2025 Pipedrive Full Year -->
+        <div class="card" style="margin-top:16px">
+          <div class="card-header">
+            <div class="card-title">2025 Pipedrive Campaign Performance — Full Year</div>
+            <div class="card-meta">55 campaigns · Jan–Dec 2025 · 53,498 total recipients</div>
+          </div>
+
+          <!-- Monthly summary for 2025 -->
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:10px">Monthly Breakdown</div>
+          <table class="data-table" style="margin-bottom:20px">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th style="text-align:right">Campaigns</th>
+                <th style="text-align:right">Recipients</th>
+                <th style="text-align:right">Opened</th>
+                <th>Open Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Jan 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td><td style="text-align:right;font-family:'DM Mono',monospace">819</td><td style="text-align:right;font-family:'DM Mono',monospace">425</td><td><span class="tag tag-gold">51.9%</span></td></tr>
+              <tr><td>Feb 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">11</td><td style="text-align:right;font-family:'DM Mono',monospace">12,385</td><td style="text-align:right;font-family:'DM Mono',monospace">5,705</td><td><span class="tag tag-gold">46.1%</span></td></tr>
+              <tr><td>Mar 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">6</td><td style="text-align:right;font-family:'DM Mono',monospace">8,239</td><td style="text-align:right;font-family:'DM Mono',monospace">3,483</td><td><span class="tag tag-teal">42.3%</span></td></tr>
+              <tr><td>Apr 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">8</td><td style="text-align:right;font-family:'DM Mono',monospace">9,777</td><td style="text-align:right;font-family:'DM Mono',monospace">4,113</td><td><span class="tag tag-teal">42.1%</span></td></tr>
+              <tr><td>May 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">5</td><td style="text-align:right;font-family:'DM Mono',monospace">3,539</td><td style="text-align:right;font-family:'DM Mono',monospace">1,495</td><td><span class="tag tag-teal">42.2%</span></td></tr>
+              <tr><td>Jun 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td><td style="text-align:right;font-family:'DM Mono',monospace">2,561</td><td style="text-align:right;font-family:'DM Mono',monospace">1,112</td><td><span class="tag tag-teal">43.4%</span></td></tr>
+              <tr><td style="color:var(--text-dim)">Jul 2025</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--text-dim)">—</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--text-dim)">—</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--text-dim)">—</td><td><span style="font-size:11px;color:var(--text-dim)">No sends</span></td></tr>
+              <tr><td>Aug 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">7</td><td style="text-align:right;font-family:'DM Mono',monospace">6,762</td><td style="text-align:right;font-family:'DM Mono',monospace">2,805</td><td><span class="tag tag-teal">41.5%</span></td></tr>
+              <tr><td>Sep 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">4</td><td style="text-align:right;font-family:'DM Mono',monospace">1,624</td><td style="text-align:right;font-family:'DM Mono',monospace">707</td><td><span class="tag tag-teal">43.5%</span></td></tr>
+              <tr><td>Oct 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td><td style="text-align:right;font-family:'DM Mono',monospace">4,193</td><td style="text-align:right;font-family:'DM Mono',monospace">1,911</td><td><span class="tag tag-teal">45.6%</span></td></tr>
+              <tr><td>Nov 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">5</td><td style="text-align:right;font-family:'DM Mono',monospace">1,812</td><td style="text-align:right;font-family:'DM Mono',monospace">986</td><td><span class="tag tag-gold">54.4%</span></td></tr>
+              <tr><td>Dec 2025</td><td style="text-align:right;font-family:'DM Mono',monospace">3</td><td style="text-align:right;font-family:'DM Mono',monospace">1,787</td><td style="text-align:right;font-family:'DM Mono',monospace">1,031</td><td><span class="tag tag-gold" style="background:rgba(201,168,76,0.25)">57.7% ↑</span></td></tr>
+            </tbody>
+          </table>
+
+          <!-- 2025 all campaigns table -->
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:10px">All Campaigns</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Campaign / Subject</th>
+                <th style="text-align:right">Sent</th>
+                <th style="text-align:right">Opened</th>
+                <th>Open Rate</th>
+                <th style="text-align:right">Clicked</th>
+                <th>Click Rate</th>
+                <th style="text-align:right">Unsubs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">W.G. McKay 2026 FTA Renewal</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Dec 16, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,336</td><td style="text-align:right;font-family:'DM Mono',monospace">856</td><td><span class="tag tag-gold" style="background:rgba(201,168,76,0.25)">64.1%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">402</td><td style="font-family:'DM Mono',monospace;color:var(--gold-light)">30.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">4</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Welcome to the GHY Family — W.G. McKay Clients</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Nov 4, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,352</td><td style="text-align:right;font-family:'DM Mono',monospace">840</td><td><span class="tag tag-gold">62.1%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">86</td><td style="font-family:'DM Mono',monospace">6.4%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">$0.35C New Service Fee for Tariff-Related Declaration Complexity</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 21, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">698</td><td style="text-align:right;font-family:'DM Mono',monospace">375</td><td><span class="tag tag-gold">53.7%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">63</td><td style="font-family:'DM Mono',monospace">9.0%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">U.S. Announces IEEPA Reciprocal Tariffs</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 7, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">593</td><td style="text-align:right;font-family:'DM Mono',monospace">317</td><td><span class="tag tag-gold">53.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">81</td><td style="font-family:'DM Mono',monospace">13.7%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Key Updates on Section 232 Duties &amp; Compliance</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 24, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">592</td><td style="text-align:right;font-family:'DM Mono',monospace">310</td><td><span class="tag tag-gold">52.4%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">111</td><td style="font-family:'DM Mono',monospace;color:var(--teal-light)">18.8%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Action Required: Shipments Web Retiring June 1</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">May 20, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">84</td><td style="text-align:right;font-family:'DM Mono',monospace">44</td><td><span class="tag tag-gold">52.4%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">27</td><td style="font-family:'DM Mono',monospace">32.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">US Tariffs — Payment Options</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Jan 28, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">656</td><td style="text-align:right;font-family:'DM Mono',monospace">341</td><td><span class="tag tag-gold">52.0%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">106</td><td style="font-family:'DM Mono',monospace">16.2%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Important: Changes to GHY's Services</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Jan 29, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">163</td><td style="text-align:right;font-family:'DM Mono',monospace">84</td><td><span class="tag tag-gold">51.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">3</td><td style="font-family:'DM Mono',monospace">1.8%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Action Required: Check Your CARM Financial Security</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Oct 17, 2025 · CBSA Recalculates on Oct. 20</div></td><td style="text-align:right;font-family:'DM Mono',monospace">2,089</td><td style="text-align:right;font-family:'DM Mono',monospace">1,032</td><td><span class="tag tag-gold">49.4%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">198</td><td style="font-family:'DM Mono',monospace">9.5%</td><td style="text-align:right;font-family:'DM Mono',monospace">3</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">GHY Moving Banks — Updated Payment Options</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 11, 2025 · Largest 2025 send</div></td><td style="text-align:right;font-family:'DM Mono',monospace">6,359</td><td style="text-align:right;font-family:'DM Mono',monospace">3,081</td><td><span class="tag tag-gold">48.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">1,073</td><td style="font-family:'DM Mono',monospace;color:var(--gold-light)">16.9%</td><td style="text-align:right;font-family:'DM Mono',monospace">37</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Important Update: Section 232 Duties on Steel &amp; Aluminum</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 18, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">579</td><td style="text-align:right;font-family:'DM Mono',monospace">282</td><td><span class="tag tag-teal">48.7%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">87</td><td style="font-family:'DM Mono',monospace">15.0%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Immediate Action Required — GHY has Changed Banks</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 14, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">206</td><td style="text-align:right;font-family:'DM Mono',monospace">101</td><td><span class="tag tag-teal">49.0%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">55</td><td style="font-family:'DM Mono',monospace">26.7%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Action Required — Recover Your Surtax</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 23, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">2,074</td><td style="text-align:right;font-family:'DM Mono',monospace">979</td><td><span class="tag tag-teal">47.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">234</td><td style="font-family:'DM Mono',monospace">11.3%</td><td style="text-align:right;font-family:'DM Mono',monospace">9</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">UPS Communication — Shipment Delays</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 7, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">13</td><td style="text-align:right;font-family:'DM Mono',monospace">6</td><td><span class="tag tag-teal">46.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">0</td><td style="font-family:'DM Mono',monospace">0.0%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Tariff Updates on Steel &amp; Aluminum Derivatives — Effective Aug 18</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Aug 18, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">976</td><td style="text-align:right;font-family:'DM Mono',monospace">450</td><td><span class="tag tag-teal">46.1%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">103</td><td style="font-family:'DM Mono',monospace">10.6%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Security Coverage (Bond) Requirement — April 2025</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 11, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">2,004</td><td style="text-align:right;font-family:'DM Mono',monospace">873</td><td><span class="tag tag-teal">43.6%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">126</td><td style="font-family:'DM Mono',monospace">6.3%</td><td style="text-align:right;font-family:'DM Mono',monospace">4</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Critical Update: U.S. De Minimis Exemption Ends August 29</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Aug 22, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,938</td><td style="text-align:right;font-family:'DM Mono',monospace">851</td><td><span class="tag tag-teal">43.9%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">185</td><td style="font-family:'DM Mono',monospace">9.5%</td><td style="text-align:right;font-family:'DM Mono',monospace">4</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Canada Post Strike — Updated Payment Options</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">May 21, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">599</td><td style="text-align:right;font-family:'DM Mono',monospace">264</td><td><span class="tag tag-teal">44.1%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">77</td><td style="font-family:'DM Mono',monospace">12.9%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">CBSA Penalties &amp; Interest Begin April 1st</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 28, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,991</td><td style="text-align:right;font-family:'DM Mono',monospace">862</td><td><span class="tag tag-teal">43.3%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">131</td><td style="font-family:'DM Mono',monospace">6.6%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Action Required — New Aluminum Import Reporting Rules (Jun 28)</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Jun 19, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">618</td><td style="text-align:right;font-family:'DM Mono',monospace">312</td><td><span class="tag tag-teal">50.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">80</td><td style="font-family:'DM Mono',monospace">12.9%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Forecasted Tariff Impact to Importers — All Clients</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Feb 4–6, 2025 · Multiple variants sent</div></td><td style="text-align:right;font-family:'DM Mono',monospace">3,373</td><td style="text-align:right;font-family:'DM Mono',monospace">1,444</td><td><span class="tag tag-teal">42.8%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">188</td><td style="font-family:'DM Mono',monospace">5.6%</td><td style="text-align:right;font-family:'DM Mono',monospace">6</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">CARM Open Mic Sessions — You're Invited!</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 19 &amp; Apr 15, 2025 · Two sends</div></td><td style="text-align:right;font-family:'DM Mono',monospace">4,492</td><td style="text-align:right;font-family:'DM Mono',monospace">1,723</td><td><span class="tag tag-teal">38.4%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">263</td><td style="font-family:'DM Mono',monospace">5.9%</td><td style="text-align:right;font-family:'DM Mono',monospace">12</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">New Tariffs (U.S. &amp; Canada)</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 4, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,855</td><td style="text-align:right;font-family:'DM Mono',monospace">764</td><td><span class="tag tag-teal">41.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">221</td><td style="font-family:'DM Mono',monospace">11.9%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">U.S. Tariffs on Canada &amp; Mexico Delayed</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 7, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">963</td><td style="text-align:right;font-family:'DM Mono',monospace">408</td><td><span class="tag tag-teal">42.4%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">68</td><td style="font-family:'DM Mono',monospace">7.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Updated Guidance: US Import Duties on Steel &amp; Aluminum</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Mar 12, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">587</td><td style="text-align:right;font-family:'DM Mono',monospace">264</td><td><span class="tag tag-teal">45.0%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">43</td><td style="font-family:'DM Mono',monospace">7.3%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Stay Ahead of CARM Notifications / Stay Penalty-Free</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Apr 17 &amp; Apr 29, 2025 · Two sends</div></td><td style="text-align:right;font-family:'DM Mono',monospace">3,946</td><td style="text-align:right;font-family:'DM Mono',monospace">1,480</td><td><span class="tag tag-sky">37.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">190</td><td style="font-family:'DM Mono',monospace">4.8%</td><td style="text-align:right;font-family:'DM Mono',monospace">7</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Reminder: RPP Bond Requirement Effective May 20, 2025</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">May 13, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,960</td><td style="text-align:right;font-family:'DM Mono',monospace">824</td><td><span class="tag tag-teal">42.0%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">150</td><td style="font-family:'DM Mono',monospace">7.7%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">ICPA USA 2025 — Track Tariffs. Recover Surtax.</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">May 22, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">745</td><td style="text-align:right;font-family:'DM Mono',monospace">307</td><td><span class="tag tag-teal">41.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">145</td><td style="font-family:'DM Mono',monospace">19.5%</td><td style="text-align:right;font-family:'DM Mono',monospace">3</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Important Reminder: Timely Payment of Duties &amp; Taxes</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Jun 19, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">1,943</td><td style="text-align:right;font-family:'DM Mono',monospace">800</td><td><span class="tag tag-teal">41.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">88</td><td style="font-family:'DM Mono',monospace">4.5%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Important Changes to U.S. Import Rules — Shipments Under $800</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Aug 11–12, 2025 · CA &amp; US variants</div></td><td style="text-align:right;font-family:'DM Mono',monospace">2,429</td><td style="text-align:right;font-family:'DM Mono',monospace">1,017</td><td><span class="tag tag-teal">41.9%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">282</td><td style="font-family:'DM Mono',monospace">11.6%</td><td style="text-align:right;font-family:'DM Mono',monospace">4</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Reciprocal Tariff Changes Effective August 7, 2025</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Aug 6, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">942</td><td style="text-align:right;font-family:'DM Mono',monospace">412</td><td><span class="tag tag-teal">43.7%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">89</td><td style="font-family:'DM Mono',monospace">9.4%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">CBP Trade Remedy Enforcement — Border Delays</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Sep 12, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">952</td><td style="text-align:right;font-family:'DM Mono',monospace">411</td><td><span class="tag tag-teal">43.2%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">112</td><td style="font-family:'DM Mono',monospace">11.8%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Canada Post Strike (Sept 26, 2025)</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Sep 27, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">605</td><td style="text-align:right;font-family:'DM Mono',monospace">265</td><td><span class="tag tag-teal">43.8%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">49</td><td style="font-family:'DM Mono',monospace">8.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Border Delays Expected — CBSA Service Outage</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Oct 2, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">2,104</td><td style="text-align:right;font-family:'DM Mono',monospace">879</td><td><span class="tag tag-teal">41.8%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">101</td><td style="font-family:'DM Mono',monospace">4.8%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">The Smartest Event in Trade is in Calgary</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Nov 10 &amp; Nov 17, 2025 · Two sends</div></td><td style="text-align:right;font-family:'DM Mono',monospace">416</td><td style="text-align:right;font-family:'DM Mono',monospace">133</td><td><span class="tag tag-sky">32.0%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">34</td><td style="font-family:'DM Mono',monospace">8.2%</td><td style="text-align:right;font-family:'DM Mono',monospace">2</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">ECCC Reminder — Importing Engines, Motors &amp; Vehicles</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Dec 12, 2025 · Two variants</div></td><td style="text-align:right;font-family:'DM Mono',monospace">451</td><td style="text-align:right;font-family:'DM Mono',monospace">175</td><td><span class="tag tag-sky">38.8%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">23</td><td style="font-family:'DM Mono',monospace">5.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">ATCC — Track Tariffs. Recover Surtax. Stay Informed.</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">May 20, 2025</div></td><td style="text-align:right;font-family:'DM Mono',monospace">151</td><td style="text-align:right;font-family:'DM Mono',monospace">56</td><td><span class="tag tag-sky">37.1%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">50</td><td style="font-family:'DM Mono',monospace">33.1%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">CARM Meetup — Invitations &amp; Confirmations</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Aug–Sep 2025 · Multiple sends</div></td><td style="text-align:right;font-family:'DM Mono',monospace">344</td><td style="text-align:right;font-family:'DM Mono',monospace">106</td><td><span class="tag tag-sky">30.8%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">35</td><td style="font-family:'DM Mono',monospace">10.2%</td><td style="text-align:right;font-family:'DM Mono',monospace">1</td></tr>
+              <tr><td><div style="font-weight:500;color:var(--text-pri);font-size:13px">Welcome to the GHY Family — BDP, Evonik, Pactiv, Novolex</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">Nov 5–7, 2025 · Multiple sends</div></td><td style="text-align:right;font-family:'DM Mono',monospace">44</td><td style="text-align:right;font-family:'DM Mono',monospace">13</td><td><span class="tag tag-sky">29.5%</span></td><td style="text-align:right;font-family:'DM Mono',monospace">2</td><td style="font-family:'DM Mono',monospace">4.5%</td><td style="text-align:right;font-family:'DM Mono',monospace">0</td></tr>
+            </tbody>
+          </table>
+          <!-- 2025 totals -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px">
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--gold-light)">53,498</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total recipients</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">23,773</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total opens (44.4%)</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal-light)">5,371</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total clicks (10.0%)</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--coral)">117</div>
+              <div style="font-size:11px;color:var(--text-dim);margin-top:3px">Total unsubs (0.22%)</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px">Source: Pipedrive Campaigns Insights export · Full year Jan–Dec 2025 · Related variant sends grouped for readability</div>
+        </div>
+
       </div>
 
       <!-- WEBSITE & SEARCH -->
@@ -1593,12 +2095,13 @@ function renderChannelBars() {
 
 // Nav — event listeners instead of inline onclick (SharePoint compatible)
 const headings = {
-  overview: 'Summary Overview',
-  campaigns: 'Email Campaigns',
-  website: 'Website & Search',
-  linkedin: 'LinkedIn',
-  events: 'Events',
-  webinars: 'Webinars & Teams Events'
+  overview:   'Summary Overview',
+  mailerlite: 'MailerLite — Email Campaigns',
+  pipedrive:  'Pipedrive Campaigns',
+  website:    'Website & Search',
+  linkedin:   'LinkedIn',
+  events:     'Events',
+  webinars:   'Webinars & Teams Events'
 };
 
 function showSection(id) {
@@ -1610,8 +2113,7 @@ function showSection(id) {
   if (navEl) navEl.classList.add('active');
   const h = document.getElementById('page-heading');
   if (h) h.textContent = headings[id] || id;
-  if (id === 'website') renderChannelBars();
-}
+  if (id === 'website') renderChannelBars();}
 
 document.querySelectorAll('.nav-item[data-section]').forEach(function(el) {
   el.addEventListener('click', function(e) {
