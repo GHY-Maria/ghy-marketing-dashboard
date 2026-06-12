@@ -32,35 +32,41 @@
     line-height:1.5;
     font-size:15px;
   }
-  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
 
   /* header */
-  header{background:var(--navy);color:#fff;padding:40px 0 36px}
+  header{background:var(--navy);color:#fff;padding:40px 0 0}
   .brand{font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
   h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,4vw,38px);margin:8px 0 4px;letter-spacing:-.01em}
   .period{font-size:14px;opacity:.85}
   .headline{
     margin-top:22px;padding:16px 20px;border-left:4px solid var(--accent);
     background:rgba(255,255,255,.07);border-radius:0 8px 8px 0;
-    font-size:16px;font-weight:500;max-width:720px;
+    font-size:16px;font-weight:500;max-width:760px;
   }
+  nav{margin-top:26px;border-top:1px solid rgba(255,255,255,.15);display:flex;flex-wrap:wrap;gap:2px;padding:10px 0}
+  nav a{color:#fff;text-decoration:none;font-size:13.5px;font-weight:500;opacity:.8;padding:6px 12px;border-radius:6px}
+  nav a:hover{opacity:1;background:rgba(255,255,255,.1)}
 
   /* sections */
-  section{padding:36px 0 8px}
+  section{padding:38px 0 6px}
   .sec-title{
-    font-family:'Archivo',sans-serif;font-weight:700;font-size:20px;
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;
     display:flex;align-items:baseline;gap:10px;margin-bottom:4px;
   }
-  .sec-sub{color:var(--slate);font-size:14px;margin-bottom:18px;max-width:680px}
+  .sec-sub{color:var(--slate);font-size:14px;margin-bottom:18px;max-width:720px}
+  h3.block{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;margin:22px 0 10px}
+  h3.block span{color:var(--slate);font-weight:500;font-family:'Inter',sans-serif;font-size:13px;margin-left:8px}
 
   /* stat cards */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stats.five{grid-template-columns:repeat(5,1fr)}
+  @media(max-width:820px){.stats,.stats.five{grid-template-columns:repeat(2,1fr)}}
   .stat{
     background:var(--card);border:1px solid var(--line);border-radius:10px;
     padding:16px 16px 14px;
   }
-  .stat .num{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(22px,3vw,28px);letter-spacing:-.01em}
+  .stat .num{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(21px,2.6vw,27px);letter-spacing:-.01em}
   .stat .lbl{font-size:13px;color:var(--slate);margin-top:2px}
   .pill{
     display:inline-block;margin-top:8px;font-size:12px;font-weight:600;
@@ -73,24 +79,29 @@
   /* takeaway line under each channel */
   .takeaway{
     background:var(--card);border:1px solid var(--line);border-radius:10px;
-    padding:14px 18px;font-size:14.5px;color:var(--ink);margin-bottom:8px;
+    padding:14px 18px;font-size:14.5px;color:var(--ink);margin:14px 0 8px;
   }
   .takeaway strong{font-weight:600}
 
-  /* simple table */
-  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px;margin-bottom:8px}
-  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600;background:#fbfcfd}
-  td{padding:9px 14px;border-bottom:1px solid var(--line)}
+  /* tables */
+  .tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:480px}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600;background:#fbfcfd;white-space:nowrap}
+  td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   tr:last-child td{border-bottom:none}
-  td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
-  .tbl-wrap{border-radius:10px;overflow:auto}
+  td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.bench td{color:var(--slate);background:#fbfcfd;font-size:13.5px}
+  .good{color:var(--up);font-weight:600}
+  .muted{color:var(--slate);font-size:13px}
+
+  /* split layout */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  @media(max-width:820px){.split{grid-template-columns:1fr}}
 
   /* working / watch */
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:760px){.two-col{grid-template-columns:1fr}}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
   .panel h3{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
   .dot.g{background:var(--up)} .dot.r{background:var(--watch)}
   .panel ul{list-style:none}
   .panel li{padding:9px 0;border-top:1px solid var(--line);font-size:14px}
@@ -98,7 +109,7 @@
   .panel li strong{font-weight:600}
 
   footer{padding:30px 0 44px;color:var(--slate);font-size:13px}
-  hr.div{border:none;border-top:1px solid var(--line);margin:30px 0 0}
+  hr.div{border:none;border-top:1px solid var(--line);margin:34px 0 0}
 </style>
 </head>
 <body>
@@ -107,94 +118,216 @@
   <div class="wrap">
     <div class="brand">GHY International</div>
     <h1>Marketing Dashboard</h1>
-    <div class="period">January 1 – April 20, 2026 &nbsp;·&nbsp; compared against full-year 2025 &nbsp;·&nbsp; GA4 · MailerLite · Pipedrive · LinkedIn · Teams</div>
+    <div class="period">January 1 – April 20, 2026 &nbsp;·&nbsp; compared against 2025 benchmarks &nbsp;·&nbsp; GA4 · MailerLite · Pipedrive · LinkedIn · Teams</div>
     <div class="headline">Tariff urgency is driving every channel. Section 232 and IEEPA content leads search traffic, email clicks, and webinar demand — and every core metric is at or above 2025 levels.</div>
+    <nav>
+      <a href="#email">Email</a>
+      <a href="#website">Website &amp; Search</a>
+      <a href="#linkedin">LinkedIn</a>
+      <a href="#events">Events &amp; Webinars</a>
+      <a href="#summary">Bottom Line</a>
+    </nav>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- EMAIL -->
+  <!-- ============ EMAIL ============ -->
   <section id="email">
     <div class="sec-title">✉ Email</div>
-    <div class="sec-sub">All campaigns: mass sends (MailerLite) plus targeted client sends (Pipedrive).</div>
-    <div class="stats">
+    <div class="sec-sub">Two programs: <strong>mass sends</strong> via MailerLite (Trade Updates, weekly roundups, dailies — ~12,300 to 82,000 recipients) and <strong>targeted sends</strong> via Pipedrive (specific client lists of 84 to 3,242 contacts).</div>
+
+    <div class="stats five">
       <div class="stat"><div class="num">262,515</div><div class="lbl">Emails sent</div><span class="pill flat">On 2025 pace</span></div>
-      <div class="stat"><div class="num">27.1%</div><div class="lbl">Open rate — mass sends</div><span class="pill flat">2025: 27.6%</span></div>
-      <div class="stat"><div class="num">4.5%</div><div class="lbl">Click rate — mass sends</div><span class="pill up">▲ 2025: 4.0%</span></div>
-      <div class="stat"><div class="num">39.8%</div><div class="lbl">Open rate — targeted sends</div><span class="pill up">2× mass sends</span></div>
+      <div class="stat"><div class="num">27.1%</div><div class="lbl">Open rate — mass</div><span class="pill flat">2025: 27.6%</span></div>
+      <div class="stat"><div class="num">4.5%</div><div class="lbl">Click rate — mass</div><span class="pill up">▲ 2025: 4.0%</span></div>
+      <div class="stat"><div class="num">39.8%</div><div class="lbl">Open rate — targeted</div><span class="pill up">2× mass sends</span></div>
+      <div class="stat"><div class="num">&lt;0.12%</div><div class="lbl">Unsubscribe rate</div><span class="pill up">Near zero</span></div>
     </div>
-    <div class="takeaway"><strong>Targeted beats mass.</strong> Emails sent to specific client lists open at nearly double the rate of mass sends, and click 8.1% vs 4.5%. Unsubscribes remain near zero (under 0.12%). Best month so far: February, at a 30.1% open rate.</div>
+
+    <h3 class="block">Monthly trend <span>mass sends · 2025 average shown for comparison</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Month</th><th class="r">Campaigns</th><th class="r">Emails sent</th><th class="r">Open rate</th><th class="r">Click rate</th></tr></thead>
+      <tbody>
+        <tr><td>April <span class="muted">(to Apr 20)</span></td><td class="r">13</td><td class="r">52,055</td><td class="r">25.9%</td><td class="r"><span class="good">6.7%</span></td></tr>
+        <tr><td>March</td><td class="r">18</td><td class="r">53,220</td><td class="r">27.0%</td><td class="r">3.6%</td></tr>
+        <tr><td>February <span class="muted">— best month</span></td><td class="r">20</td><td class="r">78,170</td><td class="r"><span class="good">30.1%</span></td><td class="r">4.1%</td></tr>
+        <tr><td>January</td><td class="r">20</td><td class="r">79,070</td><td class="r">25.3%</td><td class="r">3.8%</td></tr>
+        <tr class="bench"><td>2025 monthly average</td><td class="r">18</td><td class="r">55,664</td><td class="r">27.6%</td><td class="r">4.0%</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="block">Targeted client campaigns <span>Pipedrive · 11 campaigns · 13,016 recipients YTD</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Campaign</th><th class="r">Sent</th><th class="r">Open rate</th><th class="r">Click rate</th></tr></thead>
+      <tbody>
+        <tr><td>W.G. McKay 2026 FTA Renewal — 2nd Request <span class="muted">Feb 4</span></td><td class="r">891</td><td class="r"><span class="good">58.1%</span></td><td class="r"><span class="good">30.4%</span></td></tr>
+        <tr><td>GRI 2026 — Service Fee Adjustments (CA &amp; USA) <span class="muted">Jan 6</span></td><td class="r">3,242</td><td class="r">42.4%</td><td class="r">4.6%</td></tr>
+        <tr><td>Supreme Court Ruling on IEEPA Tariffs &amp; Duty Refunds <span class="muted">Mar 11</span></td><td class="r">1,302</td><td class="r">39.0%</td><td class="r">6.5%</td></tr>
+        <tr><td>End of IEEPA, Start of Section 122 Global Tariffs <span class="muted">Feb 24</span></td><td class="r">1,308</td><td class="r">38.1%</td><td class="r">5.4%</td></tr>
+        <tr><td>What You Don't See in CARM Could Cost You <span class="muted">Mar 12</span></td><td class="r">2,623</td><td class="r">37.2%</td><td class="r">6.0%</td></tr>
+        <tr><td>IEEPA Duty Refunds: What You Need to Do <span class="muted">Apr 16</span></td><td class="r">1,282</td><td class="r">36.9%</td><td class="r">5.1%</td></tr>
+        <tr><td>New U.S. Tariffs on Metals &amp; Pharmaceuticals <span class="muted">Apr 6</span></td><td class="r">1,297</td><td class="r">33.3%</td><td class="r"><span class="good">12.5%</span></td></tr>
+        <tr><td>Surtax refund campaigns (Steel Derivative + Canadian) <span class="muted">Mar 17–25</span></td><td class="r">586</td><td class="r">31.4%</td><td class="r"><span class="good">10.6%</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="margin:-4px 0 12px">Refund and money-back subject lines drive the highest click rates. 2025 same-period comparison: 43.8% open / 8.6% click — 2026 is slightly lower because this year's sends are routine tariff updates rather than 2025's urgent bank-migration and fee-change notices.</p>
+
+    <h3 class="block">Newsletter signups <span>Trade Updates webform · ~2,315 total subscribers</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Period</th><th class="r">New signups</th><th class="r">Monthly pace</th></tr></thead>
+      <tbody>
+        <tr><td>2026 Jan–Apr</td><td class="r">210</td><td class="r">~52 / month</td></tr>
+        <tr><td>2025 full year <span class="muted">— tariff-shock surge in Feb–Apr</span></td><td class="r">949</td><td class="r">~79 / month</td></tr>
+        <tr><td>2024 full year</td><td class="r">499</td><td class="r">~42 / month</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="takeaway"><strong>Targeted beats mass, 2 to 1.</strong> Campaigns sent to specific client lists open at nearly double the rate of mass sends and click 8.1% vs 4.5%. Signups look down vs 2025, but that's against a once-in-a-generation tariff surge (150+/month in Feb–Apr 2025) — the current ~52/month is in line with the normal baseline of ~59.</div>
   </section>
 
-  <!-- WEBSITE -->
+  <!-- ============ WEBSITE ============ -->
   <section id="website">
     <div class="sec-title">◉ Website &amp; Search</div>
-    <div class="sec-sub">Google Analytics and Search Console, ghy.com.</div>
+    <div class="sec-sub">Google Analytics and Search Console for ghy.com. 95% of visitors are new — tariff content is pulling in fresh audiences.</div>
+
     <div class="stats">
       <div class="stat"><div class="num">92,042</div><div class="lbl">Visitors</div><span class="pill flat">On 2025 pace (296K/yr)</span></div>
       <div class="stat"><div class="num">38s</div><div class="lbl">Avg. time engaged</div><span class="pill up">▲ 2025: 35s</span></div>
-      <div class="stat"><div class="num">108,849</div><div class="lbl">PAPS Tracker views — #1 page</div><span class="pill up">Daily-use client tool</span></div>
-      <div class="stat"><div class="num">2,738</div><div class="lbl">Clicks to Section 232 page</div><span class="pill up">#1 content asset</span></div>
+      <div class="stat"><div class="num">8,159</div><div class="lbl">Top organic clicks — PAPS</div><span class="pill up">11.1% CTR, best on site</span></div>
+      <div class="stat"><div class="num">5,180</div><div class="lbl">Contact Us views</div><span class="pill up">Strong service intent</span></div>
     </div>
-    <table>
-      <thead><tr><th>Top pages</th><th class="r">Views</th><th>What it tells you</th></tr></thead>
+
+    <h3 class="block">Top pages by views</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Page</th><th class="r">Views</th><th>What it tells you</th></tr></thead>
       <tbody>
-        <tr><td>PAPS Tracker</td><td class="r">108,849</td><td>Clients use it daily — it's the site's anchor</td></tr>
+        <tr><td>PAPS Tracker</td><td class="r">108,849</td><td>Clients use it daily (17.7 visits/user) — the site's anchor and retention tool</td></tr>
         <tr><td>Homepage</td><td class="r">30,068</td><td>Main entry point for new visitors</td></tr>
-        <tr><td>Section 232 tariffs</td><td class="r">8,785</td><td>People researching duty exposure — 83s avg. read time</td></tr>
-        <tr><td>Trade Updates archive</td><td class="r">6,247</td><td>Content library works as a resource hub</td></tr>
-        <tr><td>Contact Us</td><td class="r">5,180</td><td>Strong service intent</td></tr>
+        <tr><td>404 / Page not found</td><td class="r">9,803</td><td>⚠ Broken links leaking traffic — needs a redirect audit</td></tr>
+        <tr><td>Section 232 tariffs (Al/Steel/Cu)</td><td class="r">8,785</td><td>People researching duty exposure — 83s avg. read time</td></tr>
+        <tr><td>Trade Updates archive</td><td class="r">6,247</td><td>Readers browse back issues — the library works as a resource hub</td></tr>
+        <tr><td>Contact Us</td><td class="r">5,180</td><td>Lowest bounce of any high-traffic page — visitors mean business</td></tr>
+        <tr><td>Tariff Tracker</td><td class="r">3,868</td><td>New tool, already a top page — deepest engagement on the site</td></tr>
       </tbody>
-    </table>
-    <div class="takeaway"><strong>Tariff content owns search.</strong> Visitors finding GHY through Google are researching real duty exposure and stay 80+ seconds on tariff pages. Canada is the highest-value audience — visitors there stay twice as long and convert at roughly 3× the US rate.</div>
+    </table></div>
+
+    <h3 class="block">What people find through Google <span>top organic search content · 2026 YTD</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Page</th><th class="r">Clicks</th><th class="r">Avg. read time</th></tr></thead>
+      <tbody>
+        <tr><td>Section 232 Al/Steel/Cu — Full Customs Value <span class="muted">#1 content asset</span></td><td class="r">2,738</td><td class="r">83s</td></tr>
+        <tr><td>Importing a Car from Canada to US</td><td class="r">1,541</td><td class="r">84s</td></tr>
+        <tr><td>US 40% Tariff on Brazilian Imports</td><td class="r">723</td><td class="r">32s</td></tr>
+        <tr><td>Canada Steel Derivative 25% Tariffs</td><td class="r">622</td><td class="r">80s</td></tr>
+        <tr><td>CBSA Updates US Surtax Remission</td><td class="r">621</td><td class="r">107s</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="block">Where traffic comes from — and where conversions happen</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Channel</th><th class="r">2026 sessions</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Organic search <span class="muted">~50%</span></td><td class="r">77,661</td><td>Discovery — new visitors researching tariffs find GHY here</td></tr>
+        <tr><td>Direct <span class="muted">~46%</span></td><td class="r">71,329</td><td>Conversion — bookmarked tools and returning clients; <strong>all meeting bookings in 2025 came through this channel</strong></td></tr>
+        <tr><td>Referral + social + email</td><td class="r">7,051</td><td>Supporting channels</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="takeaway"><strong>Search brings them in, tools bring them back.</strong> Tariff content wins discovery (visitors stay 80+ seconds researching duty exposure), while the PAPS and Tariff Trackers keep clients returning daily. Canada is the highest-value audience — 74s engagement vs 45s for the US, and roughly 3× the conversion rate. One easy win: 18M Google impressions convert at under 1% — refreshing titles on the biggest under-clicked pages could add ~45K organic clicks a year with no new content.</div>
   </section>
 
-  <!-- LINKEDIN -->
+  <!-- ============ LINKEDIN ============ -->
   <section id="linkedin">
     <div class="sec-title">▣ LinkedIn</div>
     <div class="sec-sub">Organic only — no paid promotion.</div>
+
     <div class="stats">
       <div class="stat"><div class="num">42,013</div><div class="lbl">Impressions</div><span class="pill up">▲ Daily reach +8% vs 2025</span></div>
-      <div class="stat"><div class="num">5.1%</div><div class="lbl">Engagement rate</div><span class="pill up">▲ 2025: 5.0%</span></div>
-      <div class="stat"><div class="num">+205</div><div class="lbl">New followers</div><span class="pill watch">Slower than 2025 pace</span></div>
-      <div class="stat"><div class="num">12.6%</div><div class="lbl">Best post engagement</div><span class="pill up">CEO podcast (Mar 30)</span></div>
+      <div class="stat"><div class="num">5.1%</div><div class="lbl">Avg. engagement rate</div><span class="pill up">▲ 2025: 5.0%</span></div>
+      <div class="stat"><div class="num">1,771</div><div class="lbl">Clicks</div><span class="pill up">▲ +5.7% vs 2025 rate</span></div>
+      <div class="stat"><div class="num">+205</div><div class="lbl">New followers</div><span class="pill watch">57/mo vs 70/mo in 2025</span></div>
     </div>
-    <div class="takeaway"><strong>People posts win.</strong> The top performers are about people, not policy: the CEO podcast (12.6% engagement) and Seth Malvoisin's CES exam award (12.0%, with 111 likes and 39 comments). Tariff posts still earn solid reach, but team stories drive the conversation.</div>
+
+    <h3 class="block">Top posts by engagement <span>Jan–Apr 2026</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Post</th><th class="r">Impressions</th><th class="r">Engagement</th><th>Why it worked</th></tr></thead>
+      <tbody>
+        <tr><td>CEO Podcast — Simply Trade <span class="muted">Mar 30</span></td><td class="r">1,092</td><td class="r"><span class="good">12.6%</span></td><td>Leadership story, 106 clicks</td></tr>
+        <tr><td>Seth Malvoisin — top CES exam score <span class="muted">Apr 13</span></td><td class="r">2,905</td><td class="r"><span class="good">12.0%</span></td><td>People win — 111 likes, 39 comments</td></tr>
+        <tr><td>CUSMA Workshops, Toronto <span class="muted">Feb 18</span></td><td class="r">1,691</td><td class="r">10.5%</td><td>Event driver, 141 clicks</td></tr>
+        <tr><td>TPM26 Conference, Long Beach <span class="muted">Mar 4</span></td><td class="r">1,479</td><td class="r">10.0%</td><td>Team presence at industry event</td></tr>
+        <tr><td>Section 232 Full-Value Tariffs explained <span class="muted">Apr 3</span></td><td class="r">1,828</td><td class="r">7.1%</td><td>Best tariff post — buying-signal content</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="takeaway"><strong>People posts win.</strong> The top two performers are about people, not policy — the CEO podcast and Seth's exam award more than doubled the page's average engagement. April was the strongest month of the year (6.4% engagement), driven by the NCBFAA conference and award post cluster.</div>
   </section>
 
-  <!-- EVENTS & WEBINARS -->
+  <!-- ============ EVENTS & WEBINARS ============ -->
   <section id="events">
     <div class="sec-title">⬡ Events &amp; Webinars</div>
-    <div class="sec-sub">Nine events so far in 2026 — six hosted or presented by GHY — plus the January 13 Steel Surtax webinar.</div>
+    <div class="sec-sub">Nine events Jan–Apr (six GHY-hosted or speaking), plus the January 13 Steel Surtax live webinar.</div>
+
     <div class="stats">
       <div class="stat"><div class="num">378</div><div class="lbl">Webinar registrants</div><span class="pill up">245 unique companies</span></div>
-      <div class="stat"><div class="num">82.8%</div><div class="lbl">Show rate</div><span class="pill up">313 attended</span></div>
+      <div class="stat"><div class="num">82.8%</div><div class="lbl">Show rate</div><span class="pill up">313 attended — elite for B2B</span></div>
       <div class="stat"><div class="num">1h 12m</div><div class="lbl">Avg. watch time</div><span class="pill up">Longer than the webinar itself</span></div>
-      <div class="stat"><div class="num">9</div><div class="lbl">Events Jan–Apr</div><span class="pill flat">6 GHY-hosted / speaker</span></div>
+      <div class="stat"><div class="num">34</div><div class="lbl">Questions submitted in advance</div><span class="pill up">High-intent audience</span></div>
     </div>
-    <div class="takeaway"><strong>This is a high-intent audience.</strong> An 83% show rate is exceptional (50–60% is typical for B2B webinars), attendees stayed past the end, and 34 submitted questions in advance. Half the audience holds compliance or supply-chain roles — exactly the buyers GHY serves.</div>
+
+    <h3 class="block">Who attended the webinar <span>by job function</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Role</th><th class="r">Share of audience</th></tr></thead>
+      <tbody>
+        <tr><td>Trade / customs compliance</td><td class="r">~28%</td></tr>
+        <tr><td>Supply chain / logistics</td><td class="r">~22%</td></tr>
+        <tr><td>Management / C-suite (VP, CFO, GM)</td><td class="r">~18%</td></tr>
+        <tr><td>Procurement / purchasing</td><td class="r">~14%</td></tr>
+        <tr><td>Finance / accounting / other</td><td class="r">~18%</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="block">Events calendar <span>Jan–Apr 2026</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Date</th><th>Event</th><th>Location</th><th>GHY role</th></tr></thead>
+      <tbody>
+        <tr><td class="r">Apr 24</td><td>Bob Cowie Retirement Celebration</td><td>Winnipeg</td><td>Host — clients invited</td></tr>
+        <tr><td class="r">Apr 9</td><td>CIFFA CAPC Customs Training</td><td>—</td><td>Partner / promoter</td></tr>
+        <tr><td class="r">Mar 26–27</td><td>Tariff to Trade Confidence Workshops (CME AB)</td><td>Calgary · Lethbridge</td><td>Host</td></tr>
+        <tr><td class="r">Mar 19</td><td>Advanced Manufacturing Summit 2026</td><td>Calgary</td><td>Attending</td></tr>
+        <tr><td class="r">Mar 5–12</td><td>CUSMA Compliance Workshops</td><td>Toronto · Ottawa</td><td>Speaker</td></tr>
+        <tr><td class="r">Mar 4–5</td><td>Trans-Pacific Maritime Conference (TPM26)</td><td>Long Beach, CA</td><td>Attending</td></tr>
+        <tr><td class="r">Mar 3–4</td><td>ICPA Annual Conference</td><td>San Antonio, TX</td><td>Exhibiting</td></tr>
+        <tr><td class="r">Feb 10–19</td><td>CUSMA Compliance Workshops (ON series)</td><td>Niagara · Windsor · Vaughan</td><td>Speaker</td></tr>
+        <tr><td class="r">Jan 28</td><td>Made in Manitoba B2B Summit</td><td>Winnipeg</td><td>Attending</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="takeaway"><strong>This is a buyer's audience.</strong> An 83% show rate is exceptional (50–60% is typical for B2B), attendees stayed past the end, and a third of companies sent multiple people. Over 60% of attendees hold compliance, supply-chain, or executive roles — exactly the people who choose a customs broker.</div>
   </section>
 
   <hr class="div">
 
-  <!-- WORKING / WATCH -->
+  <!-- ============ BOTTOM LINE ============ -->
   <section id="summary">
     <div class="sec-title">The bottom line</div>
-    <div class="two-col">
+    <div class="split">
       <div class="panel">
         <h3><span class="dot g"></span>What's working</h3>
         <ul>
-          <li><strong>Tariff urgency is the engine.</strong> The same Section 232 / IEEPA topics lead search traffic, email clicks, and webinar demand at the same time.</li>
-          <li><strong>Targeted email outperforms 2-to-1.</strong> Sends to specific client lists double the open rate of mass sends. Do more of these.</li>
-          <li><strong>Canada converts best.</strong> Roughly 3× the conversion rate of US visitors — Canada-focused campaigns get the most return per effort.</li>
+          <li><strong>Tariff urgency is the engine.</strong> The same Section 232 / IEEPA topics lead search traffic, email clicks, and webinar demand simultaneously.</li>
+          <li><strong>Targeted email outperforms 2-to-1.</strong> Sends to specific client lists double the open rate of mass sends — refund-themed subject lines click best of all.</li>
+          <li><strong>Canada converts best.</strong> Roughly 3× the conversion rate of US visitors — Canada-focused campaigns return the most per effort.</li>
+          <li><strong>Webinars reach real buyers.</strong> 245 companies, 83% show rate, and an audience dominated by compliance and supply-chain decision-makers.</li>
         </ul>
       </div>
       <div class="panel">
         <h3><span class="dot r"></span>What to watch</h3>
         <ul>
-          <li><strong>Newsletter signups have normalized.</strong> ~52/month vs the 150/month spike during 2025's tariff shock. That's a return to baseline, not a decline — but worth a signup push.</li>
-          <li><strong>Broken links are leaking traffic.</strong> The 404 error page got 9,803 views this year. An audit and redirects would recover that traffic.</li>
+          <li><strong>Broken links are leaking traffic.</strong> The 404 page got 9,803 views this year — a redirect audit would recover it.</li>
+          <li><strong>Search titles under-deliver.</strong> 18M Google impressions convert at under 1%. Refreshing titles on the biggest under-clicked pages could add ~45K clicks/year with no new content.</li>
+          <li><strong>Newsletter signups have normalized</strong> (~52/month vs the 150/month spike during 2025's tariff shock). Baseline-normal, but worth a signup push while tariff interest is high.</li>
           <li><strong>LinkedIn followers growing slower</strong> (57/month vs 70 in 2025), even as reach and engagement climb.</li>
         </ul>
       </div>
@@ -202,7 +335,7 @@
   </section>
 
   <footer>
-    Data through April 20, 2026. 2025 figures are full-calendar-year benchmarks where available (LinkedIn benchmark covers Apr–Dec 2025, the available export window). Sources: GA4, Google Search Console, MailerLite, Pipedrive, LinkedIn Analytics, Microsoft Teams.
+    Data through April 20, 2026. 2025 figures are full-calendar-year benchmarks where available (LinkedIn benchmark covers Apr 21 – Dec 31, 2025, the available export window; MailerLite 2025 uses the full-year weighted average). China and Singapore bot traffic excluded from audience insights. Sources: GA4, Google Search Console, MailerLite, Pipedrive, LinkedIn Analytics, Microsoft Teams.
   </footer>
 
 </div>
